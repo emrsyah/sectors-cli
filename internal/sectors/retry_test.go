@@ -86,7 +86,7 @@ func TestShouldRetry(t *testing.T) {
 		{"GET", 503, nil, true},
 		{"GET", 404, nil, false},
 		{"GET", 400, nil, false},
-		{"GET", 0, io.EOF, true}, // network error
+		{"GET", 0, io.EOF, true},  // network error
 		{"POST", 503, nil, false}, // non-idempotent never retried
 	}
 	for _, c := range cases {

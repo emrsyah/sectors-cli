@@ -74,7 +74,7 @@ func shouldRetry(method string, resp *http.Response, err error) bool {
 		return true // transport/network error
 	}
 	switch resp.StatusCode {
-	case http.StatusTooManyRequests,     // 429
+	case http.StatusTooManyRequests, // 429
 		http.StatusInternalServerError, // 500 (this API emits transient 500s)
 		http.StatusBadGateway,          // 502
 		http.StatusServiceUnavailable,  // 503

@@ -1,0 +1,27 @@
+name: Smoke (live API)
+
+# Runs representative commands against the real Sectors API to catch endpoint
+# breakage / spec drift early. Needs a repo secret SECTORS_API_KEY.
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - run: go build -o sectors .
+      - name: live smoke
+        env:
+          SECTORS_API_KEY: ${{ secrets.SECTORS_API_KEY }}
+          SECTORS_BIN: ./sectors
+        run: bash scripts/smoke.sh

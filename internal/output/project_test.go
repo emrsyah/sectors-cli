@@ -119,10 +119,10 @@ func TestTruncate_NoOpWhenUnderLimit(t *testing.T) {
 
 func TestCount(t *testing.T) {
 	cases := map[string]int{
-		`[1,2,3]`:                  3,
-		`{"results":[1,2]}`:        2,
-		`{"data":[1,2,3,4]}`:       4,
-		`{"symbol":"BBCA"}`:        1,
+		`[1,2,3]`:            3,
+		`{"results":[1,2]}`:  2,
+		`{"data":[1,2,3,4]}`: 4,
+		`{"symbol":"BBCA"}`:  1,
 	}
 	for in, want := range cases {
 		out, err := Count([]byte(in))

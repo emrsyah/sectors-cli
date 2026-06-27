@@ -127,7 +127,15 @@ report is large; agents rarely need all of it.
 
 ---
 
-## 4. CI/CD + spec-drift smoke tests + LICENSE
+## 4. CI/CD + spec-drift smoke tests + LICENSE ✅ DONE
+
+> Shipped: `.github/workflows/ci.yml` (gofmt + build + vet + test, and a
+> generated-fresh job: `go generate` then `git diff --exit-code` on the gen'd
+> client), `release.yml` (goreleaser on `v*` tags), `smoke.yml` (daily live run).
+> `scripts/smoke.sh` exercises ~62 commands with tolerant id discovery (404 on a
+> discovered id = benign). `LICENSE` = MIT (holder "Supertype" — CONFIRM/CHANGE).
+> Needs repo secret `SECTORS_API_KEY` for the smoke job. Verified locally: smoke
+> 62/0, all CI gates green.
 
 **Goal.** Reproducible, trustworthy releases; catch upstream spec drift before
 agents do.
