@@ -1,0 +1,20 @@
+# oapi-codegen config — generates a typed Go client + models from the
+# Sectors API v2 OpenAPI spec (sectors-schema.json).
+# Run via `go generate ./...` (see internal/sectors/generate.go).
+package: sectors
+output: sectors.gen.go
+generate:
+  models: true
+  client: true
+output-options:
+  name-normalizer: ToCamelCaseWithInitialisms
+  additional-initialisms:
+    - IDX
+    - SGX
+    - KLSE
+    - IPO
+    - IUP
+    - IUPK
+    - WIUP
+    - ESG
+    - YOY

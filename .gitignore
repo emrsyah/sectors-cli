@@ -1,0 +1,13 @@
+# Build artifacts
+/sectors
+/sectors.exe
+/dist/
+
+# Generated intermediate (produced by `go generate` from sectors-schema.json)
+/sectors-schema.fixed.json
+
+# OS / editor
+.DS_Store
+*.log
+
+/sectors-docs
