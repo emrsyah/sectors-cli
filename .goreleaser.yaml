@@ -1,0 +1,60 @@
+# goreleaser config — cross-platform binaries for the sectors CLI.
+# Build a snapshot locally:  goreleaser release --snapshot --clean
+# Cut a real release:        git tag v0.1.0 && goreleaser release --clean
+version: 2
+
+project_name: sectors-cli
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: sectors
+    main: .
+    binary: sectors
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+      - -X github.com/supertypeai/sectors-cli/cmd.Version={{ .Version }}
+
+archives:
+  - id: sectors
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    files:
+      - README.md
+      - LICENSE*
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+release:
+  draft: true
+
+# Homebrew tap — uncomment and set `repository.owner`/`name` to a tap repo you
+# own (e.g. github.com/<you>/homebrew-tap) to publish `brew install sectors`.
+# brews:
+#   - name: sectors
+#     repository:
+#       owner: supertypeai
+#       name: homebrew-tap
+#     homepage: https://docs.sectors.app
+#     description: CLI for the Sectors Financial API (IDX, SGX, KLSE, mining)
+#     install: |
+#       bin.install "sectors"
+#       generate_completions_from_executable(bin/"sectors", "completion")
