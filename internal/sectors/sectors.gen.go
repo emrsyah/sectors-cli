@@ -382,1909 +382,6 @@ func (e SGXFilingsRetrieveParamsHolderType) Valid() bool {
 	}
 }
 
-// BrokerActivityByCodeResponse defines model for BrokerActivityByCodeResponse.
-type BrokerActivityByCodeResponse struct {
-	// BrokerCode Broker code.
-	BrokerCode string                 `json:"broker_code"`
-	Data       []BrokerActivityByDate `json:"data"`
-
-	// End Range end date.
-	End string `json:"end"`
-
-	// Start Range start date.
-	Start string `json:"start"`
-}
-
-// BrokerActivityByDate defines model for BrokerActivityByDate.
-type BrokerActivityByDate struct {
-	Date    string              `json:"date"`
-	Summary []BrokerActivityRow `json:"summary"`
-}
-
-// BrokerActivityRow defines model for BrokerActivityRow.
-type BrokerActivityRow struct {
-	// BavgPerShare Buy avg per share.
-	BavgPerShare float64 `json:"bavg_per_share"`
-
-	// Bfreq Buy frequency.
-	Bfreq int `json:"bfreq"`
-
-	// Blot Buy lots.
-	Blot int `json:"blot"`
-
-	// Bval Buy value (IDR).
-	Bval int `json:"bval"`
-
-	// NavgPerShare Net avg per share.
-	NavgPerShare float64 `json:"navg_per_share"`
-
-	// Nlot Net lots (buy - sell).
-	Nlot int `json:"nlot"`
-
-	// Nval Net value (buy - sell, IDR).
-	Nval int `json:"nval"`
-
-	// SavgPerShare Sell avg per share.
-	SavgPerShare float64 `json:"savg_per_share"`
-
-	// Sfreq Sell frequency.
-	Sfreq int `json:"sfreq"`
-
-	// Slot Sell lots.
-	Slot int `json:"slot"`
-
-	// Sval Sell value (IDR).
-	Sval int `json:"sval"`
-
-	// Symbol Ticker symbol (e.g. BBCA.JK).
-	Symbol string `json:"symbol"`
-}
-
-// BrokerActivityTopAccumulation defines model for BrokerActivityTopAccumulation.
-type BrokerActivityTopAccumulation struct {
-	BuyIdr  int    `json:"buy_idr"`
-	NetIdr  int    `json:"net_idr"`
-	Rank    int    `json:"rank"`
-	SellIdr int    `json:"sell_idr"`
-	Symbol  string `json:"symbol"`
-}
-
-// BrokerActivityTopDistribution defines model for BrokerActivityTopDistribution.
-type BrokerActivityTopDistribution struct {
-	BuyIdr  int    `json:"buy_idr"`
-	NetIdr  int    `json:"net_idr"`
-	Rank    int    `json:"rank"`
-	SellIdr int    `json:"sell_idr"`
-	Symbol  string `json:"symbol"`
-}
-
-// BrokerActivityTopResponse defines model for BrokerActivityTopResponse.
-type BrokerActivityTopResponse struct {
-	BrokerCode       string                          `json:"broker_code"`
-	End              string                          `json:"end"`
-	Start            string                          `json:"start"`
-	TopAccumulations []BrokerActivityTopAccumulation `json:"top_accumulations"`
-	TopDistributions []BrokerActivityTopDistribution `json:"top_distributions"`
-}
-
-// BrokerRegistryRow defines model for BrokerRegistryRow.
-type BrokerRegistryRow struct {
-	// Code Broker code.
-	Code string `json:"code"`
-
-	// Cohort One of: retail, mixed, institutional, unknown; null if unclassified.
-	Cohort      *string `json:"cohort"`
-	IsForeign   bool    `json:"is_foreign"`
-	LicenseType *string `json:"license_type"`
-
-	// Name Human-readable broker name.
-	Name string `json:"name"`
-}
-
-// BrokerSummaryByDate defines model for BrokerSummaryByDate.
-type BrokerSummaryByDate struct {
-	Date    string             `json:"date"`
-	Summary []BrokerSummaryRow `json:"summary"`
-}
-
-// BrokerSummaryBySymbolResponse defines model for BrokerSummaryBySymbolResponse.
-type BrokerSummaryBySymbolResponse struct {
-	Data []BrokerSummaryByDate `json:"data"`
-
-	// End Range end date.
-	End string `json:"end"`
-
-	// Start Range start date.
-	Start string `json:"start"`
-
-	// Symbol Ticker symbol (e.g. BBCA.JK).
-	Symbol string `json:"symbol"`
-}
-
-// BrokerSummaryRow defines model for BrokerSummaryRow.
-type BrokerSummaryRow struct {
-	// BavgPerShare Buy avg per share.
-	BavgPerShare float64 `json:"bavg_per_share"`
-
-	// Bfreq Buy frequency.
-	Bfreq int `json:"bfreq"`
-
-	// Blot Buy lots.
-	Blot int `json:"blot"`
-
-	// BrokerCode Broker code.
-	BrokerCode string `json:"broker_code"`
-
-	// Bval Buy value (IDR).
-	Bval int `json:"bval"`
-
-	// NavgPerShare Net avg per share.
-	NavgPerShare float64 `json:"navg_per_share"`
-
-	// Nlot Net lots (buy - sell).
-	Nlot int `json:"nlot"`
-
-	// Nval Net value (buy - sell, IDR).
-	Nval int `json:"nval"`
-
-	// SavgPerShare Sell avg per share.
-	SavgPerShare float64 `json:"savg_per_share"`
-
-	// Sfreq Sell frequency.
-	Sfreq int `json:"sfreq"`
-
-	// Slot Sell lots.
-	Slot int `json:"slot"`
-
-	// Sval Sell value (IDR).
-	Sval int `json:"sval"`
-}
-
-// BrokerSummaryTopBuyer defines model for BrokerSummaryTopBuyer.
-type BrokerSummaryTopBuyer struct {
-	BrokerCode string `json:"broker_code"`
-	BuyIdr     int    `json:"buy_idr"`
-	NetIdr     int    `json:"net_idr"`
-	Rank       int    `json:"rank"`
-	SellIdr    int    `json:"sell_idr"`
-}
-
-// BrokerSummaryTopResponse defines model for BrokerSummaryTopResponse.
-type BrokerSummaryTopResponse struct {
-	Cohort string `json:"cohort"`
-
-	// End Range end date.
-	End    string `json:"end"`
-	Origin string `json:"origin"`
-
-	// Start Range start date.
-	Start string `json:"start"`
-
-	// Symbol Ticker symbol.
-	Symbol     string                   `json:"symbol"`
-	TopBuyers  []BrokerSummaryTopBuyer  `json:"top_buyers"`
-	TopSellers []BrokerSummaryTopSeller `json:"top_sellers"`
-}
-
-// BrokerSummaryTopSeller defines model for BrokerSummaryTopSeller.
-type BrokerSummaryTopSeller struct {
-	BrokerCode string `json:"broker_code"`
-	BuyIdr     int    `json:"buy_idr"`
-	NetIdr     int    `json:"net_idr"`
-	Rank       int    `json:"rank"`
-	SellIdr    int    `json:"sell_idr"`
-}
-
-// CommodityListItem defines model for CommodityListItem.
-type CommodityListItem struct {
-	// DataPoints Number of price data points.
-	DataPoints int `json:"data_points"`
-
-	// EarliestDate Earliest available date.
-	EarliestDate string `json:"earliest_date"`
-
-	// LatestDate Latest available date.
-	LatestDate string `json:"latest_date"`
-
-	// Name Commodity name.
-	Name string `json:"name"`
-}
-
-// CommodityPriceItem defines model for CommodityPriceItem.
-type CommodityPriceItem struct {
-	// Date Price date (monthly).
-	Date string `json:"date"`
-
-	// Name Commodity name.
-	Name string `json:"name"`
-
-	// PriceUsdPerTon Price in USD per metric ton.
-	PriceUsdPerTon float64 `json:"price_usd_per_ton"`
-}
-
-// CompanyRevenueSegments defines model for CompanyRevenueSegments.
-type CompanyRevenueSegments struct {
-	// FinancialYear Financial year of the data.
-	FinancialYear    int          `json:"financial_year"`
-	RevenueBreakdown []SankeyNode `json:"revenue_breakdown"`
-
-	// Symbol Ticker symbol.
-	Symbol string `json:"symbol"`
-}
-
-// CompanyScreenerItem defines model for CompanyScreenerItem.
-type CompanyScreenerItem struct {
-	// CompanyName Full registered company name.
-	CompanyName string `json:"company_name"`
-
-	// Symbol Ticker symbol (e.g. BBCA.JK).
-	Symbol string `json:"symbol"`
-}
-
-// CompanyScreenerPagination defines model for CompanyScreenerPagination.
-type CompanyScreenerPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// CompanyScreenerResponse defines model for CompanyScreenerResponse.
-type CompanyScreenerResponse struct {
-	LlmTranslation LLMTranslation            `json:"llm_translation"`
-	Pagination     CompanyScreenerPagination `json:"pagination"`
-	Results        []CompanyScreenerItem     `json:"results"`
-}
-
-// CorporateActionsByType defines model for CorporateActionsByType.
-type CorporateActionsByType struct {
-	// Agm Annual general meeting events.
-	Agm []interface{} `json:"agm"`
-
-	// Bonus Bonus share events.
-	Bonus []interface{} `json:"bonus"`
-
-	// Dividend Historical dividend events.
-	Dividend []interface{} `json:"dividend"`
-
-	// RightIssue Rights issue events.
-	RightIssue []interface{} `json:"right_issue"`
-
-	// StockSplit Stock split events.
-	StockSplit []interface{} `json:"stock_split"`
-
-	// UpcomingDividend Dividends announced but not yet paid.
-	UpcomingDividend []interface{} `json:"upcoming_dividend"`
-
-	// Warrant Warrant issuance events.
-	Warrant []interface{} `json:"warrant"`
-}
-
-// CorporateActionsResponse defines model for CorporateActionsResponse.
-type CorporateActionsResponse struct {
-	CorporateActions CorporateActionsByType `json:"corporate_actions"`
-
-	// Symbol IDX ticker symbol (with `.JK` suffix).
-	Symbol string `json:"symbol"`
-}
-
-// DailyDataItem defines model for DailyDataItem.
-type DailyDataItem struct {
-	// Close Closing price in IDR.
-	Close int `json:"close"`
-
-	// Date Trading date.
-	Date string `json:"date"`
-
-	// MarketCap Market cap in IDR.
-	MarketCap int `json:"market_cap"`
-
-	// Symbol Ticker symbol.
-	Symbol string `json:"symbol"`
-
-	// Volume Trading volume (shares).
-	Volume int `json:"volume"`
-}
-
-// ExportDestinationItem defines model for ExportDestinationItem.
-type ExportDestinationItem struct {
-	// Country Destination country name.
-	Country string `json:"country"`
-
-	// ExportUsd Export value in USD.
-	ExportUsd float64 `json:"export_usd"`
-
-	// ExportVolumeBps Export volume (BPS source).
-	ExportVolumeBps *float64 `json:"export_volume_bps"`
-
-	// ExportVolumeEsdm Export volume (ESDM source).
-	ExportVolumeEsdm *float64 `json:"export_volume_esdm"`
-
-	// VolumeUnit Volume unit (e.g. Mt).
-	VolumeUnit string `json:"volume_unit"`
-}
-
-// ForeignFlowDailyPoint defines model for ForeignFlowDailyPoint.
-type ForeignFlowDailyPoint struct {
-	Date string `json:"date"`
-
-	// NetForeignInflow IDR. Positive = foreign brokers were net buyers that day.
-	NetForeignInflow int `json:"net_foreign_inflow"`
-}
-
-// ForeignFlowResponse defines model for ForeignFlowResponse.
-type ForeignFlowResponse struct {
-	Data []ForeignFlowDailyPoint `json:"data"`
-
-	// End Range end date.
-	End string `json:"end"`
-
-	// Start Range start date.
-	Start string `json:"start"`
-
-	// Symbol Ticker symbol.
-	Symbol string `json:"symbol"`
-}
-
-// FreeFloatItem defines model for FreeFloatItem.
-type FreeFloatItem struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// FreeFloat Free float as a decimal (0.45 = 45%).
-	FreeFloat float64 `json:"free_float"`
-
-	// Symbol Ticker symbol (e.g. BBCA.JK).
-	Symbol string `json:"symbol"`
-}
-
-// GlobalCommodityDataItem defines model for GlobalCommodityDataItem.
-type GlobalCommodityDataItem struct {
-	// CommodityType Commodity type.
-	CommodityType string `json:"commodity_type"`
-
-	// Country Country name.
-	Country string `json:"country"`
-
-	// ExportImportUsd Trade data keyed by year: `{year: {export, import}}`.
-	ExportImportUsd map[string]interface{} `json:"export_import_usd"`
-
-	// ProductionShare Production share (%) keyed by year.
-	ProductionShare map[string]interface{} `json:"production_share"`
-
-	// ProductionVolume Production volume keyed by year.
-	ProductionVolume map[string]interface{} `json:"production_volume"`
-
-	// ProductionVolumeUnit Unit for production volume (e.g. ton).
-	ProductionVolumeUnit string `json:"production_volume_unit"`
-
-	// ResourcesReserves Total resources/reserves.
-	ResourcesReserves *float64 `json:"resources_reserves"`
-
-	// ResourcesReservesShare Share of global resources/reserves (%).
-	ResourcesReservesShare *float64 `json:"resources_reserves_share"`
-
-	// ResourcesReservesUnit Unit for resources/reserves (e.g. ton).
-	ResourcesReservesUnit string `json:"resources_reserves_unit"`
-}
-
-// IDXTotalItem defines model for IDXTotalItem.
-type IDXTotalItem struct {
-	// Date Trading date.
-	Date string `json:"date"`
-
-	// IDXTotalMarketCap Total IDX market cap in IDR.
-	IDXTotalMarketCap int `json:"idx_total_market_cap"`
-}
-
-// IPOPerformance defines model for IPOPerformance.
-type IPOPerformance struct {
-	// Chg30D Price change since listing at 30 days.
-	Chg30D *float64 `json:"chg_30d"`
-
-	// Chg365D Price change since listing at 365 days.
-	Chg365D *float64 `json:"chg_365d"`
-
-	// Chg7D Price change since listing at 7 days.
-	Chg7D *float64 `json:"chg_7d"`
-
-	// Chg90D Price change since listing at 90 days.
-	Chg90D *float64 `json:"chg_90d"`
-
-	// Symbol Ticker symbol.
-	Symbol string `json:"symbol"`
-}
-
-// IDXFilings defines model for IdxFilings.
-type IDXFilings struct {
-	Pagination IDXFilingsPagination `json:"pagination"`
-	Results    []IDXFilingsItem     `json:"results"`
-}
-
-// IDXFilingsItem defines model for IdxFilingsItem.
-type IDXFilingsItem struct {
-	// AmountTransaction Number of shares transacted.
-	AmountTransaction *int `json:"amount_transaction"`
-
-	// Body Filing body text.
-	Body *string `json:"body"`
-
-	// HolderName Name of the transacting party.
-	HolderName *string `json:"holder_name"`
-
-	// HolderType Type of holder, `insider`, `institution`, or `corporate-investor`
-	HolderType *string `json:"holder_type"`
-
-	// HoldingAfter Shares held after the transaction.
-	HoldingAfter *int `json:"holding_after"`
-
-	// HoldingBefore Shares held before the transaction.
-	HoldingBefore *int `json:"holding_before"`
-
-	// IDXConglomeratesGroupSlug Conglomerate group slugs associated with this filing.
-	IDXConglomeratesGroupSlug *[]string `json:"idx_conglomerates_group_slug"`
-
-	// IDXInvestorSlug Slug for the investor profile.
-	IDXInvestorSlug *string `json:"idx_investor_slug"`
-
-	// Price Weighted average price per share (IDR).
-	Price string `json:"price"`
-
-	// PriceTransaction Breakdown of prices and amounts transacted.
-	PriceTransaction interface{} `json:"price_transaction"`
-
-	// Sector Sector slug.
-	Sector string `json:"sector"`
-
-	// SharePercentageAfter Ownership percentage after the transaction.
-	SharePercentageAfter *float64 `json:"share_percentage_after"`
-
-	// SharePercentageBefore Ownership percentage before the transaction.
-	SharePercentageBefore *float64 `json:"share_percentage_before"`
-
-	// SharePercentageTransaction Percentage of shares transacted.
-	SharePercentageTransaction *float64 `json:"share_percentage_transaction"`
-
-	// Source URL to the original IDX filing.
-	Source *string `json:"source"`
-
-	// SubSector Sub-sector slug.
-	SubSector string `json:"sub_sector"`
-
-	// Symbol IDX symbol symbol. E.g. `BBCA`.
-	Symbol *string `json:"symbol"`
-
-	// Tags Tag slugs.
-	Tags *[]string `json:"tags"`
-
-	// Timestamp Timestamp of the transaction.
-	Timestamp *string `json:"timestamp"`
-
-	// Title Filing title.
-	Title *string `json:"title"`
-
-	// TransactionType `buy`, `sell`, or `others`.
-	TransactionType *string `json:"transaction_type"`
-
-	// TransactionValue Total transaction value (IDR).
-	TransactionValue *string `json:"transaction_value"`
-}
-
-// IDXFilingsPagination defines model for IdxFilingsPagination.
-type IDXFilingsPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// IDXSuspensions defines model for IdxSuspensions.
-type IDXSuspensions struct {
-	Pagination IDXSuspensionsPagination `json:"pagination"`
-	Results    []IDXSuspensionsItem     `json:"results"`
-}
-
-// IDXSuspensionsItem defines model for IdxSuspensionsItem.
-type IDXSuspensionsItem struct {
-	// PdfURL Link to the IDX PDF notice for this suspension.
-	PdfURL *string `json:"pdf_url"`
-
-	// Reason Official reason for the suspension.
-	Reason *string `json:"reason"`
-
-	// SuspensionDate Date the suspension took effect.
-	SuspensionDate string `json:"suspension_date"`
-
-	// Symbol IDX ticker symbol (with `.JK` suffix).
-	Symbol string `json:"symbol"`
-}
-
-// IDXSuspensionsPagination defines model for IdxSuspensionsPagination.
-type IDXSuspensionsPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// IndexDailyDataItem defines model for IndexDailyDataItem.
-type IndexDailyDataItem struct {
-	// Date Trading date.
-	Date string `json:"date"`
-
-	// IndexCode Index code (e.g. IDX30, LQ45).
-	IndexCode string `json:"index_code"`
-
-	// Price Index closing price.
-	Price float64 `json:"price"`
-}
-
-// IndustryItem defines model for IndustryItem.
-type IndustryItem struct {
-	// Industry Industry slug (kebab-case).
-	Industry string `json:"industry"`
-
-	// Subsector Subsector slug (kebab-case).
-	Subsector string `json:"subsector"`
-}
-
-// KLSECompanyListItem defines model for KlseCompanyListItem.
-type KLSECompanyListItem struct {
-	// CompanyName Full registered company name.
-	CompanyName string `json:"company_name"`
-
-	// Symbol KLSE 4-digit numeric symbol.
-	Symbol string `json:"symbol"`
-}
-
-// KLSETopCompaniesResponse defines model for KlseTopCompaniesResponse.
-type KLSETopCompaniesResponse struct {
-	DividendYield *[]KLSETopDividendYieldRow `json:"dividend_yield,omitempty"`
-	Earnings      *[]KLSETopEarningsRow      `json:"earnings,omitempty"`
-	MarketCap     *[]KLSETopMarketCapRow     `json:"market_cap,omitempty"`
-	Pe            *[]KLSETopPeRow            `json:"pe,omitempty"`
-	Revenue       *[]KLSETopRevenueRow       `json:"revenue,omitempty"`
-}
-
-// KLSETopDividendYieldRow defines model for KlseTopDividendYieldRow.
-type KLSETopDividendYieldRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// ForwardDividendYield Forward dividend yield as a decimal.
-	ForwardDividendYield *float64 `json:"forward_dividend_yield"`
-
-	// Symbol KLSE 4-digit numeric symbol.
-	Symbol string `json:"symbol"`
-}
-
-// KLSETopEarningsRow defines model for KlseTopEarningsRow.
-type KLSETopEarningsRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// Earnings Total earnings (MYR).
-	Earnings *float64 `json:"earnings"`
-
-	// Symbol KLSE 4-digit numeric symbol.
-	Symbol string `json:"symbol"`
-}
-
-// KLSETopMarketCapRow defines model for KlseTopMarketCapRow.
-type KLSETopMarketCapRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// MarketCap Market capitalization (MYR).
-	MarketCap *float64 `json:"market_cap"`
-
-	// Symbol KLSE 4-digit numeric symbol.
-	Symbol string `json:"symbol"`
-}
-
-// KLSETopPeRow defines model for KlseTopPeRow.
-type KLSETopPeRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// Pe Price-to-earnings ratio.
-	Pe *float64 `json:"pe"`
-
-	// Symbol KLSE 4-digit numeric symbol.
-	Symbol string `json:"symbol"`
-}
-
-// KLSETopRevenueRow defines model for KlseTopRevenueRow.
-type KLSETopRevenueRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// Revenue Total revenue (MYR).
-	Revenue *float64 `json:"revenue"`
-
-	// Symbol KLSE 4-digit numeric symbol.
-	Symbol string `json:"symbol"`
-}
-
-// LLMTranslation defines model for LLMTranslation.
-type LLMTranslation struct {
-	// Message Explanation of the translation.
-	Message string `json:"message"`
-
-	// NaturalQuery The original natural language query.
-	NaturalQuery string `json:"natural_query"`
-
-	// TranslatedParams Structured query params generated by the LLM.
-	TranslatedParams map[string]interface{} `json:"translated_params"`
-}
-
-// MiningCompanyDetail defines model for MiningCompanyDetail.
-type MiningCompanyDetail struct {
-	// Activities Business activities.
-	Activities []string `json:"activities"`
-
-	// CommodityType Commodities produced.
-	CommodityType []string `json:"commodity_type"`
-
-	// CompanyType Company type (e.g. Holding, Subsidiary).
-	CompanyType string `json:"company_type"`
-
-	// KeyOperation Primary business operation.
-	KeyOperation string `json:"key_operation"`
-
-	// MiningContract Associated mining contracts.
-	MiningContract []map[string]interface{} `json:"mining_contract"`
-
-	// MiningLicense Associated mining licenses.
-	MiningLicense []map[string]interface{} `json:"mining_license"`
-
-	// MiningSiteCount Number of mining sites.
-	MiningSiteCount int `json:"mining_site_count"`
-
-	// Name Full company name.
-	Name string `json:"name"`
-
-	// OperationProvince Province of operations.
-	OperationProvince *string `json:"operation_province"`
-
-	// Slug URL-friendly company slug.
-	Slug string `json:"slug"`
-
-	// Symbol IDX symbol symbol.
-	Symbol *string `json:"symbol"`
-}
-
-// MiningCompanyFinancials defines model for MiningCompanyFinancials.
-type MiningCompanyFinancials struct {
-	// AvailableYears All years with data.
-	AvailableYears []int `json:"available_years"`
-
-	// Data Financial data object with assets, revenue, profit in USD millions.
-	Data map[string]interface{} `json:"data"`
-
-	// Year Requested reporting year.
-	Year int `json:"year"`
-}
-
-// MiningCompanyList defines model for MiningCompanyList.
-type MiningCompanyList struct {
-	Pagination MiningCompanyListPagination `json:"pagination"`
-	Results    []MiningCompanyListItem     `json:"results"`
-}
-
-// MiningCompanyListItem defines model for MiningCompanyListItem.
-type MiningCompanyListItem struct {
-	// CommodityType Commodities produced.
-	CommodityType []string `json:"commodity_type"`
-
-	// CompanyType E.g. Holding, Subsidiary, Mine Owner.
-	CompanyType string `json:"company_type"`
-
-	// KeyOperation Primary business operation.
-	KeyOperation string `json:"key_operation"`
-
-	// Name Full company name.
-	Name string `json:"name"`
-
-	// Slug URL-friendly company slug.
-	Slug string `json:"slug"`
-
-	// Symbol IDX symbol symbol, if listed.
-	Symbol *string `json:"symbol"`
-}
-
-// MiningCompanyListPagination defines model for MiningCompanyListPagination.
-type MiningCompanyListPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// MiningCompanyOwnership defines model for MiningCompanyOwnership.
-type MiningCompanyOwnership struct {
-	Parents []OwnershipParentItem `json:"parents"`
-
-	// Slug Company slug.
-	Slug         string                    `json:"slug"`
-	Subsidiaries []OwnershipSubsidiaryItem `json:"subsidiaries"`
-}
-
-// MiningCompanyPerformance defines model for MiningCompanyPerformance.
-type MiningCompanyPerformance struct {
-	// AvailableYears All years with data.
-	AvailableYears []int `json:"available_years"`
-
-	// Data Performance records per commodity.
-	Data []map[string]interface{} `json:"data"`
-
-	// Year Requested reporting year.
-	Year int `json:"year"`
-}
-
-// MiningContractItem defines model for MiningContractItem.
-type MiningContractItem struct {
-	// ContractPeriodEnd Contract end date.
-	ContractPeriodEnd *string `json:"contract_period_end"`
-
-	// ContractorName Contractor company name.
-	ContractorName string `json:"contractor_name"`
-
-	// ContractorSlug Contractor company slug.
-	ContractorSlug string `json:"contractor_slug"`
-
-	// MineOwnerName Mine owner company name.
-	MineOwnerName string `json:"mine_owner_name"`
-
-	// MineOwnerSlug Mine owner company slug.
-	MineOwnerSlug string `json:"mine_owner_slug"`
-}
-
-// MiningLicenseAuctionDetail defines model for MiningLicenseAuctionDetail.
-type MiningLicenseAuctionDetail struct {
-	// AreaType Area type (e.g. WIUPK).
-	AreaType string `json:"area_type"`
-
-	// AuctionStatus Auction status.
-	AuctionStatus string `json:"auction_status"`
-
-	// City City/regency.
-	City string `json:"city"`
-
-	// CommodityType Commodity type.
-	CommodityType string `json:"commodity_type"`
-
-	// CompanyName Winning company name.
-	CompanyName string `json:"company_name"`
-
-	// CompanySlug Company slug.
-	CompanySlug *string `json:"company_slug"`
-
-	// CreatedAt Record creation date.
-	CreatedAt string `json:"created_at"`
-
-	// Kdi KDI value.
-	Kdi *string `json:"kdi"`
-
-	// LastModified Last modified date.
-	LastModified string `json:"last_modified"`
-
-	// LicenseNumber License number.
-	LicenseNumber *string `json:"license_number"`
-
-	// LicensedAreaHa Licensed area in hectares.
-	LicensedAreaHa float64 `json:"licensed_area_ha"`
-
-	// ParticipantCount Number of participants.
-	ParticipantCount int `json:"participant_count"`
-
-	// Participants Participant list with qualification results.
-	Participants []map[string]interface{} `json:"participants"`
-
-	// Phases Auction timeline phases.
-	Phases []map[string]interface{} `json:"phases"`
-
-	// Province Province.
-	Province string `json:"province"`
-
-	// Winner Whether a winner was declared.
-	Winner bool `json:"winner"`
-
-	// WinnerDate Winner announcement date.
-	WinnerDate *string `json:"winner_date"`
-
-	// WIUPCode WIUP identification code.
-	WIUPCode string `json:"wiup_code"`
-}
-
-// MiningLicenseAuctionList defines model for MiningLicenseAuctionList.
-type MiningLicenseAuctionList struct {
-	Pagination MiningLicenseAuctionListPagination `json:"pagination"`
-	Results    []MiningLicenseAuctionListItem     `json:"results"`
-}
-
-// MiningLicenseAuctionListItem defines model for MiningLicenseAuctionListItem.
-type MiningLicenseAuctionListItem struct {
-	// AreaType Area type (e.g. WIUPK).
-	AreaType string `json:"area_type"`
-
-	// AuctionStatus Auction status (e.g. Lelang Selesai).
-	AuctionStatus string `json:"auction_status"`
-
-	// City City/regency name.
-	City string `json:"city"`
-
-	// CommodityType Commodity type (e.g. Nickel, Coal).
-	CommodityType string `json:"commodity_type"`
-
-	// CompanyName Winning company name.
-	CompanyName string `json:"company_name"`
-
-	// CompanySlug Winning company slug.
-	CompanySlug *string `json:"company_slug"`
-
-	// Kdi KDI value.
-	Kdi *string `json:"kdi"`
-
-	// LicenseNumber License number.
-	LicenseNumber *string `json:"license_number"`
-
-	// LicensedAreaHa Licensed area in hectares.
-	LicensedAreaHa float64 `json:"licensed_area_ha"`
-
-	// ParticipantCount Number of participants.
-	ParticipantCount int `json:"participant_count"`
-
-	// Province Province name.
-	Province string `json:"province"`
-
-	// Winner Whether a winner was declared.
-	Winner bool `json:"winner"`
-
-	// WinnerDate Date winner was announced.
-	WinnerDate *string `json:"winner_date"`
-
-	// WIUPCode WIUP identification code.
-	WIUPCode string `json:"wiup_code"`
-}
-
-// MiningLicenseAuctionListPagination defines model for MiningLicenseAuctionListPagination.
-type MiningLicenseAuctionListPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// MiningLicenseList defines model for MiningLicenseList.
-type MiningLicenseList struct {
-	Pagination MiningLicenseListPagination `json:"pagination"`
-	Results    []MiningLicenseListItem     `json:"results"`
-}
-
-// MiningLicenseListItem defines model for MiningLicenseListItem.
-type MiningLicenseListItem struct {
-	// Activity Activity stage (e.g. Operasi Produksi).
-	Activity string `json:"activity"`
-
-	// City City/regency name.
-	City string `json:"city"`
-
-	// Cnc Clear & Clean status.
-	Cnc *string `json:"cnc"`
-
-	// CommodityType Commodity type.
-	CommodityType string `json:"commodity_type"`
-
-	// CompanyName License holder company name.
-	CompanyName string `json:"company_name"`
-
-	// CompanySlug Company slug.
-	CompanySlug *string `json:"company_slug"`
-
-	// Generation License generation.
-	Generation *string `json:"generation"`
-
-	// LicenseEffectiveDate License start date.
-	LicenseEffectiveDate string `json:"license_effective_date"`
-
-	// LicenseExpiryDate License expiry date.
-	LicenseExpiryDate string `json:"license_expiry_date"`
-
-	// LicenseNumber Official license number.
-	LicenseNumber string `json:"license_number"`
-
-	// LicenseType License type (e.g. IUP, IUPK).
-	LicenseType string `json:"license_type"`
-
-	// LicensedAreaHa Licensed area in hectares.
-	LicensedAreaHa float64 `json:"licensed_area_ha"`
-
-	// Location GeoJSON Point with coordinates.
-	Location *map[string]interface{} `json:"location"`
-
-	// Province Province name.
-	Province string `json:"province"`
-
-	// WIUPCode WIUP identification code.
-	WIUPCode string `json:"wiup_code"`
-}
-
-// MiningLicenseListPagination defines model for MiningLicenseListPagination.
-type MiningLicenseListPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// MiningSiteDetail defines model for MiningSiteDetail.
-type MiningSiteDetail struct {
-	// CommodityType Commodity type.
-	CommodityType string `json:"commodity_type"`
-
-	// CompanyName Parent company name.
-	CompanyName string `json:"company_name"`
-
-	// CompanySlug Parent company slug.
-	CompanySlug string `json:"company_slug"`
-
-	// Location Location with province, city, latitude, longitude.
-	Location map[string]interface{} `json:"location"`
-
-	// Name Mining site name.
-	Name string `json:"name"`
-
-	// OverburdenRemovalVolume Overburden removal volume.
-	OverburdenRemovalVolume *float64 `json:"overburden_removal_volume"`
-
-	// ProductionVolume Production volume.
-	ProductionVolume float64 `json:"production_volume"`
-
-	// ProjectName Project name.
-	ProjectName *string `json:"project_name"`
-
-	// ResourcesReserves Resources and reserves breakdown.
-	ResourcesReserves []map[string]interface{} `json:"resources_reserves"`
-
-	// Slug Mining site slug.
-	Slug string `json:"slug"`
-
-	// StripRatio Strip ratio.
-	StripRatio *float64 `json:"strip_ratio"`
-
-	// Unit Production unit.
-	Unit string `json:"unit"`
-
-	// Year Reporting year.
-	Year int `json:"year"`
-}
-
-// MiningSiteList defines model for MiningSiteList.
-type MiningSiteList struct {
-	Pagination MiningSiteListPagination `json:"pagination"`
-	Results    []MiningSiteListItem     `json:"results"`
-}
-
-// MiningSiteListItem defines model for MiningSiteListItem.
-type MiningSiteListItem struct {
-	// City City/regency name.
-	City string `json:"city"`
-
-	// CommodityType Commodity type (e.g. Coal, Nickel).
-	CommodityType string `json:"commodity_type"`
-
-	// CompanyName Parent company name.
-	CompanyName string `json:"company_name"`
-
-	// CompanySlug Parent company slug.
-	CompanySlug string `json:"company_slug"`
-
-	// Name Mining site name.
-	Name string `json:"name"`
-
-	// ProductionVolume Production volume.
-	ProductionVolume float64 `json:"production_volume"`
-
-	// ProjectName Project name.
-	ProjectName *string `json:"project_name"`
-
-	// Province Province name.
-	Province string `json:"province"`
-
-	// Slug Mining site slug.
-	Slug string `json:"slug"`
-
-	// StripRatio Strip ratio.
-	StripRatio *float64 `json:"strip_ratio"`
-
-	// Unit Production unit (e.g. Mt, Kg).
-	Unit string `json:"unit"`
-
-	// Year Reporting year.
-	Year int `json:"year"`
-}
-
-// MiningSiteListPagination defines model for MiningSiteListPagination.
-type MiningSiteListPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// NewsArticleList defines model for NewsArticleList.
-type NewsArticleList struct {
-	Pagination NewsArticleListPagination `json:"pagination"`
-	Results    []NewsArticleListItem     `json:"results"`
-}
-
-// NewsArticleListItem defines model for NewsArticleListItem.
-type NewsArticleListItem struct {
-	// Body Article body text (IDX only).
-	Body *string `json:"body,omitempty"`
-
-	// CommodityType Commodity types (mining only).
-	CommodityType *[]string `json:"commodity_type,omitempty"`
-
-	// Dimension News dimension (IDX only).
-	Dimension *string `json:"dimension,omitempty"`
-
-	// Sector Sector slug (IDX only).
-	Sector *string `json:"sector,omitempty"`
-
-	// Source Source URL.
-	Source string `json:"source"`
-
-	// SubSector Subsector slugs (IDX only).
-	SubSector *[]string `json:"sub_sector,omitempty"`
-
-	// Symbols Related IDX symbols (IDX only).
-	Symbols *[]string `json:"symbols,omitempty"`
-
-	// Tags Tag slugs (IDX only).
-	Tags *[]string `json:"tags,omitempty"`
-
-	// Thumbnail Thumbnail image URL (IDX only).
-	Thumbnail *string `json:"thumbnail,omitempty"`
-
-	// Timestamp Article publication timestamp.
-	Timestamp string `json:"timestamp"`
-
-	// Title Article headline.
-	Title string `json:"title"`
-}
-
-// NewsArticleListPagination defines model for NewsArticleListPagination.
-type NewsArticleListPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// OwnershipParentItem defines model for OwnershipParentItem.
-type OwnershipParentItem struct {
-	// Name Parent company name.
-	Name string `json:"name"`
-
-	// PercentageOwnership Ownership stake (%).
-	PercentageOwnership float64 `json:"percentage_ownership"`
-
-	// Slug Parent company slug.
-	Slug string `json:"slug"`
-
-	// Symbol IDX symbol.
-	Symbol *string `json:"symbol"`
-}
-
-// OwnershipSubsidiaryItem defines model for OwnershipSubsidiaryItem.
-type OwnershipSubsidiaryItem struct {
-	// Name Subsidiary company name.
-	Name string `json:"name"`
-
-	// PercentageOwnership Ownership stake (%).
-	PercentageOwnership float64 `json:"percentage_ownership"`
-
-	// Slug Subsidiary company slug.
-	Slug string `json:"slug"`
-
-	// Symbol IDX symbol.
-	Symbol *string `json:"symbol"`
-}
-
-// QuarterlyFinancialItem defines model for QuarterlyFinancialItem.
-type QuarterlyFinancialItem struct {
-	// Date Quarterly report date.
-	Date string `json:"date"`
-
-	// Earnings Quarterly net earnings in IDR.
-	Earnings *int `json:"earnings"`
-
-	// FinancialsSectorMetrics Additional metrics for financial-sector companies (banks, insurance).
-	FinancialsSectorMetrics *map[string]interface{} `json:"financials_sector_metrics,omitempty"`
-
-	// OperatingCashFlow Operating cash flow in IDR.
-	OperatingCashFlow *int `json:"operating_cash_flow"`
-
-	// Revenue Quarterly revenue in IDR.
-	Revenue *int `json:"revenue"`
-
-	// Symbol Ticker symbol.
-	Symbol string `json:"symbol"`
-
-	// TotalAssets Total assets in IDR.
-	TotalAssets *int `json:"total_assets"`
-
-	// TotalEquity Total equity in IDR.
-	TotalEquity *int `json:"total_equity"`
-}
-
-// ResourcesReservesDetail defines model for ResourcesReservesDetail.
-type ResourcesReservesDetail struct {
-	// Data Nested data: `{year: {commodity: {exploration_target, total_inventory, resources, reserves, unit}}}`.
-	Data map[string]interface{} `json:"data"`
-
-	// Province Province name.
-	Province string `json:"province"`
-}
-
-// SGXTopCompaniesResponse defines model for SGXTopCompaniesResponse.
-type SGXTopCompaniesResponse struct {
-	DividendYield *[]SGXTopDividendYieldRow `json:"dividend_yield,omitempty"`
-	Earnings      *[]SGXTopEarningsRow      `json:"earnings,omitempty"`
-	MarketCap     *[]SGXTopMarketCapRow     `json:"market_cap,omitempty"`
-	Pe            *[]SGXTopPeRow            `json:"pe,omitempty"`
-	Revenue       *[]SGXTopRevenueRow       `json:"revenue,omitempty"`
-}
-
-// SGXTopDividendYieldRow defines model for SGXTopDividendYieldRow.
-type SGXTopDividendYieldRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// ForwardDividendYield Forward dividend yield as a decimal.
-	ForwardDividendYield *float64 `json:"forward_dividend_yield"`
-
-	// Symbol SGX 3-character symbol.
-	Symbol string `json:"symbol"`
-}
-
-// SGXTopEarningsRow defines model for SGXTopEarningsRow.
-type SGXTopEarningsRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// Earnings Total earnings (SGD).
-	Earnings *int `json:"earnings"`
-
-	// Symbol SGX 3-character symbol.
-	Symbol string `json:"symbol"`
-}
-
-// SGXTopMarketCapRow defines model for SGXTopMarketCapRow.
-type SGXTopMarketCapRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// MarketCap Market capitalization (SGD).
-	MarketCap *int `json:"market_cap"`
-
-	// Symbol SGX 3-character symbol.
-	Symbol string `json:"symbol"`
-}
-
-// SGXTopPeRow defines model for SGXTopPeRow.
-type SGXTopPeRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// Pe Price-to-earnings ratio.
-	Pe *float64 `json:"pe"`
-
-	// Symbol SGX 3-character symbol.
-	Symbol string `json:"symbol"`
-}
-
-// SGXTopRevenueRow defines model for SGXTopRevenueRow.
-type SGXTopRevenueRow struct {
-	// CompanyName Full company name.
-	CompanyName string `json:"company_name"`
-
-	// Revenue Total revenue (SGD).
-	Revenue *int `json:"revenue"`
-
-	// Symbol SGX 3-character symbol.
-	Symbol string `json:"symbol"`
-}
-
-// SalesDestinationResponse defines model for SalesDestinationResponse.
-type SalesDestinationResponse struct {
-	// Data Sales data keyed by country name. Each entry contains revenue_usd, percentage_of_total_revenue, volume, percentage_of_sales_volume, commodity_type, and unit.
-	Data map[string]interface{} `json:"data"`
-
-	// Year Reporting year.
-	Year int `json:"year"`
-}
-
-// SankeyNode defines model for SankeyNode.
-type SankeyNode struct {
-	// Source Source node label.
-	Source string `json:"source"`
-
-	// Target Target node label.
-	Target string `json:"target"`
-
-	// Value Segment value in IDR.
-	Value float64 `json:"value"`
-}
-
-// SGXBuybacks defines model for SgxBuybacks.
-type SGXBuybacks struct {
-	Pagination SGXBuybacksPagination `json:"pagination"`
-	Results    []SGXBuybacksItem     `json:"results"`
-}
-
-// SGXBuybacksItem defines model for SgxBuybacksItem.
-type SGXBuybacksItem struct {
-	// Mandate Buyback mandate details as a structured JSON object.
-	Mandate interface{} `json:"mandate"`
-
-	// PricePerShare Per-share price range as a structured JSON object.
-	PricePerShare interface{} `json:"price_per_share"`
-
-	// PurchaseDate Date the buyback transaction was executed.
-	PurchaseDate string `json:"purchase_date"`
-
-	// Symbol SGX 3-character symbol.
-	Symbol string `json:"symbol"`
-
-	// TotalSharesPurchased Number of shares repurchased.
-	TotalSharesPurchased *int `json:"total_shares_purchased"`
-
-	// TotalValue Total value of the buyback (SGD).
-	TotalValue *float64 `json:"total_value"`
-
-	// TreasurySharesAfterPurchase Treasury share count after this transaction.
-	TreasurySharesAfterPurchase *int `json:"treasury_shares_after_purchase"`
-
-	// Type Buyback mechanism (e.g. on-market purchase).
-	Type *string `json:"type"`
-}
-
-// SGXBuybacksPagination defines model for SgxBuybacksPagination.
-type SGXBuybacksPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// SGXCompanyScreenerItem defines model for SgxCompanyScreenerItem.
-type SGXCompanyScreenerItem struct {
-	// CompanyName Full registered company name.
-	CompanyName string `json:"company_name"`
-
-	// Symbol SGX symbol (e.g. D05, U11).
-	Symbol string `json:"symbol"`
-}
-
-// SGXCompanyScreenerPagination defines model for SgxCompanyScreenerPagination.
-type SGXCompanyScreenerPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// SGXCompanyScreenerResponse defines model for SgxCompanyScreenerResponse.
-type SGXCompanyScreenerResponse struct {
-	LlmTranslation SGXLLMTranslation            `json:"llm_translation"`
-	Pagination     SGXCompanyScreenerPagination `json:"pagination"`
-	Results        []SGXCompanyScreenerItem     `json:"results"`
-}
-
-// SGXDailyDataItem defines model for SgxDailyDataItem.
-type SGXDailyDataItem struct {
-	// Close Closing price (SGD).
-	Close *float64 `json:"close"`
-
-	// Date Trading date.
-	Date string `json:"date"`
-
-	// Symbol SGX 3-character symbol.
-	Symbol string `json:"symbol"`
-
-	// Volume Number of shares traded.
-	Volume *int `json:"volume"`
-}
-
-// SGXFilings defines model for SgxFilings.
-type SGXFilings struct {
-	Pagination SGXFilingsPagination `json:"pagination"`
-	Results    []SGXFilingsItem     `json:"results"`
-}
-
-// SGXFilingsItem defines model for SgxFilingsItem.
-type SGXFilingsItem struct {
-	// AmountTransaction Number of shares in this transaction.
-	AmountTransaction *int `json:"amount_transaction"`
-
-	// HolderName Name of the insider or institution.
-	HolderName *string `json:"holder_name"`
-
-	// HolderType One of: insider, institution.
-	HolderType *string `json:"holder_type"`
-
-	// HoldingAfter Share count held after the transaction.
-	HoldingAfter *int `json:"holding_after"`
-
-	// HoldingBefore Share count held before the transaction.
-	HoldingBefore *int `json:"holding_before"`
-
-	// PricePerShare Price per share (SGD).
-	PricePerShare *float64 `json:"price_per_share"`
-
-	// SharePercentageAfter Holder's ownership percentage after the transaction.
-	SharePercentageAfter *float64 `json:"share_percentage_after"`
-
-	// SharePercentageBefore Holder's ownership percentage before the transaction.
-	SharePercentageBefore *float64 `json:"share_percentage_before"`
-
-	// SharePercentageTransaction Percentage change in ownership from this transaction.
-	SharePercentageTransaction *float64 `json:"share_percentage_transaction"`
-
-	// Symbol SGX 3-character symbol.
-	Symbol *string `json:"symbol"`
-
-	// Timestamp Filing date.
-	Timestamp *string `json:"timestamp"`
-
-	// TransactionType One of: award, buy, others, sell, transfer.
-	TransactionType *string `json:"transaction_type"`
-
-	// TransactionValue Total transaction value (SGD).
-	TransactionValue *float64 `json:"transaction_value"`
-}
-
-// SGXFilingsPagination defines model for SgxFilingsPagination.
-type SGXFilingsPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// SGXLLMTranslation defines model for SgxLLMTranslation.
-type SGXLLMTranslation struct {
-	// Message Explanation of the translation.
-	Message string `json:"message"`
-
-	// NaturalQuery The original natural language query.
-	NaturalQuery string `json:"natural_query"`
-
-	// TranslatedParams Structured query params generated by the LLM.
-	TranslatedParams map[string]interface{} `json:"translated_params"`
-}
-
-// SGXNews defines model for SgxNews.
-type SGXNews struct {
-	Pagination SGXNewsPagination `json:"pagination"`
-	Results    []SGXNewsItem     `json:"results"`
-}
-
-// SGXNewsItem defines model for SgxNewsItem.
-type SGXNewsItem struct {
-	// Body Article body content.
-	Body *string `json:"body"`
-
-	// Dimension Article dimension metadata as structured JSON.
-	Dimension interface{} `json:"dimension"`
-
-	// Sector Primary sector of the article.
-	Sector string `json:"sector"`
-
-	// Source Publication source.
-	Source string `json:"source"`
-
-	// SubSector List of sub-sectors covered.
-	SubSector []string `json:"sub_sector"`
-
-	// Symbols List of SGX symbols mentioned.
-	Symbols []string `json:"symbols"`
-
-	// Tags List of tag slugs.
-	Tags []string `json:"tags"`
-
-	// Timestamp Article publication timestamp (ISO 8601).
-	Timestamp string `json:"timestamp"`
-
-	// Title Article headline.
-	Title *string `json:"title"`
-}
-
-// SGXNewsPagination defines model for SgxNewsPagination.
-type SGXNewsPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// SGXShortSell defines model for SgxShortSell.
-type SGXShortSell struct {
-	Pagination SGXShortSellPagination `json:"pagination"`
-	Results    []SGXShortSellItem     `json:"results"`
-}
-
-// SGXShortSellItem defines model for SgxShortSellItem.
-type SGXShortSellItem struct {
-	// Date Settlement date of the short sell activity.
-	Date string `json:"date"`
-
-	// Name Counterparty / short seller name.
-	Name string `json:"name"`
-
-	// Symbol SGX 3-character symbol.
-	Symbol string `json:"symbol"`
-
-	// Value Total value of shorts (SGD).
-	Value *float64 `json:"value"`
-
-	// Volume Number of shares shorted.
-	Volume *int `json:"volume"`
-}
-
-// SGXShortSellPagination defines model for SgxShortSellPagination.
-type SGXShortSellPagination struct {
-	// HasNext Whether a next page exists.
-	HasNext bool `json:"has_next"`
-
-	// HasPrevious Whether a previous page exists.
-	HasPrevious bool `json:"has_previous"`
-
-	// Limit Maximum results per page.
-	Limit int `json:"limit"`
-
-	// NextOffset Offset for the next page, or null.
-	NextOffset *int `json:"next_offset"`
-
-	// Offset Number of results skipped.
-	Offset int `json:"offset"`
-
-	// PreviousOffset Offset for the previous page, or null.
-	PreviousOffset *int `json:"previous_offset"`
-
-	// Showing Number of results in this page.
-	Showing int `json:"showing"`
-
-	// TotalCount Total number of matching results.
-	TotalCount int `json:"total_count"`
-}
-
-// SGXTagListResponse defines model for SgxTagListResponse.
-type SGXTagListResponse struct {
-	Tags []string `json:"tags"`
-}
-
-// ShareholdersCompositionResponse defines model for ShareholdersCompositionResponse.
-type ShareholdersCompositionResponse struct {
-	Data []ShareholdersCompositionRow `json:"data"`
-
-	// Symbol IDX ticker symbol (with `.JK` suffix).
-	Symbol string `json:"symbol"`
-
-	// Year Calendar year of the snapshots returned.
-	Year int `json:"year"`
-}
-
-// ShareholdersCompositionRow defines model for ShareholdersCompositionRow.
-type ShareholdersCompositionRow struct {
-	// ChangeInShareholders Net change in shareholder count vs the previous snapshot.
-	ChangeInShareholders *int `json:"change_in_shareholders"`
-
-	// CorporateF Shares held by foreign corporates.
-	CorporateF *int `json:"corporate_f"`
-
-	// CorporateL Shares held by local corporates.
-	CorporateL *int `json:"corporate_l"`
-
-	// Date Snapshot date (end-of-month).
-	Date string `json:"date"`
-
-	// FinancialInstitutionsF Shares held by foreign financial institutions.
-	FinancialInstitutionsF *int `json:"financial_institutions_f"`
-
-	// FinancialInstitutionsL Shares held by local financial institutions.
-	FinancialInstitutionsL *int `json:"financial_institutions_l"`
-
-	// FoundationF Shares held by foreign foundations.
-	FoundationF *int `json:"foundation_f"`
-
-	// FoundationL Shares held by local foundations.
-	FoundationL *int `json:"foundation_l"`
-
-	// IndividualF Shares held by foreign individuals.
-	IndividualF *int `json:"individual_f"`
-
-	// IndividualL Shares held by local individuals.
-	IndividualL *int `json:"individual_l"`
-
-	// InsuranceF Shares held by foreign insurance companies.
-	InsuranceF *int `json:"insurance_f"`
-
-	// InsuranceL Shares held by local insurance companies.
-	InsuranceL *int `json:"insurance_l"`
-
-	// MutualFundF Shares held by foreign mutual funds.
-	MutualFundF *int `json:"mutual_fund_f"`
-
-	// MutualFundL Shares held by local mutual funds.
-	MutualFundL *int `json:"mutual_fund_l"`
-
-	// NumbersOfShareholders Total number of shareholders on the snapshot date.
-	NumbersOfShareholders *int `json:"numbers_of_shareholders"`
-
-	// OtherF Shares held by other foreign entities.
-	OtherF *int `json:"other_f"`
-
-	// OtherL Shares held by other local entities.
-	OtherL *int `json:"other_l"`
-
-	// PensionFundF Shares held by foreign pension funds.
-	PensionFundF *int `json:"pension_fund_f"`
-
-	// PensionFundL Shares held by local pension funds.
-	PensionFundL *int `json:"pension_fund_l"`
-
-	// SecuritiesCompaniesF Shares held by foreign securities companies.
-	SecuritiesCompaniesF *int `json:"securities_companies_f"`
-
-	// SecuritiesCompaniesL Shares held by local securities companies.
-	SecuritiesCompaniesL *int `json:"securities_companies_l"`
-
-	// SharesNumber Total outstanding shares on the snapshot date.
-	SharesNumber *int `json:"shares_number"`
-
-	// TotalF Total foreign-investor shares.
-	TotalF *int `json:"total_f"`
-
-	// TotalL Total local-investor shares.
-	TotalL *int `json:"total_l"`
-}
-
-// SubindustryItem defines model for SubindustryItem.
-type SubindustryItem struct {
-	// Industry Industry slug (kebab-case).
-	Industry string `json:"industry"`
-
-	// SubIndustry Sub-industry slug (kebab-case).
-	SubIndustry string `json:"sub_industry"`
-}
-
-// SubsectorItem defines model for SubsectorItem.
-type SubsectorItem struct {
-	// Sector Sector slug (kebab-case).
-	Sector string `json:"sector"`
-
-	// Subsector Subsector slug (kebab-case).
-	Subsector string `json:"subsector"`
-}
-
-// TopBrokersResponse defines model for TopBrokersResponse.
-type TopBrokersResponse struct {
-	Cohort  string          `json:"cohort"`
-	Date    string          `json:"date"`
-	Metric  string          `json:"metric"`
-	Origin  string          `json:"origin"`
-	Results []TopBrokersRow `json:"results"`
-}
-
-// TopBrokersRow defines model for TopBrokersRow.
-type TopBrokersRow struct {
-	BrokerCode string `json:"broker_code"`
-
-	// Gross Sum of buy + sell value (IDR).
-	Gross int `json:"gross"`
-
-	// Net Sum of net value (IDR, signed).
-	Net int `json:"net"`
-
-	// Rank 1-indexed rank within the day.
-	Rank int `json:"rank"`
-}
-
-// TopCompaniesChangesResponse defines model for TopCompaniesChangesResponse.
-type TopCompaniesChangesResponse struct {
-	// TopGainers Keyed by period (`1d`, `7d`, `14d`, `30d`, `365d`).
-	TopGainers map[string][]TopGainersRow `json:"top_gainers"`
-
-	// TopLosers Keyed by period (`1d`, `7d`, `14d`, `30d`, `365d`).
-	TopLosers map[string][]TopLosersRow `json:"top_losers"`
-}
-
-// TopGainersRow defines model for TopGainersRow.
-type TopGainersRow struct {
-	// LastClosePrice Most recent close price (IDR).
-	LastClosePrice int `json:"last_close_price"`
-
-	// LatestCloseDate Date of the most recent close.
-	LatestCloseDate string `json:"latest_close_date"`
-
-	// Name Full company name.
-	Name string `json:"name"`
-
-	// PriceChange Price change as a decimal (0.05 = +5%).
-	PriceChange float64 `json:"price_change"`
-
-	// Symbol IDX ticker symbol (with `.JK` suffix).
-	Symbol string `json:"symbol"`
-}
-
-// TopLosersRow defines model for TopLosersRow.
-type TopLosersRow struct {
-	// LastClosePrice Most recent close price (IDR).
-	LastClosePrice int `json:"last_close_price"`
-
-	// LatestCloseDate Date of the most recent close.
-	LatestCloseDate string `json:"latest_close_date"`
-
-	// Name Full company name.
-	Name string `json:"name"`
-
-	// PriceChange Price change as a decimal (-0.05 = -5%).
-	PriceChange float64 `json:"price_change"`
-
-	// Symbol IDX ticker symbol (with `.JK` suffix).
-	Symbol string `json:"symbol"`
-}
-
-// TotalProductionItem defines model for TotalProductionItem.
-type TotalProductionItem struct {
-	// PrevYearVolume Previous year production volume.
-	PrevYearVolume *float64 `json:"prev_year_volume"`
-
-	// ProductionVolume Total production volume.
-	ProductionVolume float64 `json:"production_volume"`
-
-	// Unit Production unit (e.g. Mt, Kg).
-	Unit string `json:"unit"`
-
-	// Year Reporting year.
-	Year int `json:"year"`
-
-	// YOYChangePercent Year-over-year change (%).
-	YOYChangePercent *float64 `json:"yoy_change_percent"`
-}
-
 // aPIKeyAuthContextKey is the context key for ApiKeyAuth security scheme
 type aPIKeyAuthContextKey string
 
@@ -8978,9 +7075,9 @@ type ClientWithResponsesInterface interface {
 type BrokerActivityRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *BrokerActivityByCodeResponse
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9010,9 +7107,9 @@ func (r BrokerActivityRetrieveResponse) ContentType() string {
 type BrokerActivityTopRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *BrokerActivityTopResponse
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9042,9 +7139,9 @@ func (r BrokerActivityTopRetrieveResponse) ContentType() string {
 type BrokerSummaryRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *BrokerSummaryBySymbolResponse
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9074,9 +7171,9 @@ func (r BrokerSummaryRetrieveResponse) ContentType() string {
 type BrokerSummaryTopRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *BrokerSummaryTopResponse
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9106,8 +7203,8 @@ func (r BrokerSummaryTopRetrieveResponse) ContentType() string {
 type BrokersRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]BrokerRegistryRow
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9137,9 +7234,9 @@ func (r BrokersRetrieveResponse) ContentType() string {
 type BrokersTopRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *TopBrokersResponse
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9169,9 +7266,9 @@ func (r BrokersTopRetrieveResponse) ContentType() string {
 type CompaniesRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *CompanyScreenerResponse
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9201,8 +7298,8 @@ func (r CompaniesRetrieveResponse) ContentType() string {
 type CompaniesListCompaniesWithSegmentsListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9232,9 +7329,9 @@ func (r CompaniesListCompaniesWithSegmentsListResponse) ContentType() string {
 type CompaniesTopChangesRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *TopCompaniesChangesResponse
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9264,9 +7361,9 @@ func (r CompaniesTopChangesRetrieveResponse) ContentType() string {
 type CompanyCorporateActionsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *CorporateActionsResponse
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9296,9 +7393,9 @@ func (r CompanyCorporateActionsRetrieveResponse) ContentType() string {
 type CompanyGetSegmentsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *CompanyRevenueSegments
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9328,9 +7425,9 @@ func (r CompanyGetSegmentsRetrieveResponse) ContentType() string {
 type CompanyGetQuarterlyFinancialDatesRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]interface{}
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9360,9 +7457,9 @@ func (r CompanyGetQuarterlyFinancialDatesRetrieveResponse) ContentType() string 
 type CompanyReportRetrieve2Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]interface{}
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9392,9 +7489,9 @@ func (r CompanyReportRetrieve2Response) ContentType() string {
 type CompanyShareholdersCompositionRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ShareholdersCompositionResponse
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9424,9 +7521,9 @@ func (r CompanyShareholdersCompositionRetrieveResponse) ContentType() string {
 type DailyRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *DailyDataItem
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9456,9 +7553,9 @@ func (r DailyRetrieveResponse) ContentType() string {
 type FilingsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *IDXFilings
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9488,9 +7585,9 @@ func (r FilingsRetrieveResponse) ContentType() string {
 type FinancialsQuarterlyRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *QuarterlyFinancialItem
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9520,9 +7617,9 @@ func (r FinancialsQuarterlyRetrieveResponse) ContentType() string {
 type ForeignFlowRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ForeignFlowResponse
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9552,8 +7649,8 @@ func (r ForeignFlowRetrieveResponse) ContentType() string {
 type FreeFloatRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *FreeFloatItem
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9583,9 +7680,9 @@ func (r FreeFloatRetrieveResponse) ContentType() string {
 type IDXTotalRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *IDXTotalItem
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9615,9 +7712,9 @@ func (r IDXTotalRetrieveResponse) ContentType() string {
 type IndexDailyRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *IndexDailyDataItem
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9647,8 +7744,8 @@ func (r IndexDailyRetrieveResponse) ContentType() string {
 type IndustriesListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]IndustryItem
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9678,9 +7775,9 @@ func (r IndustriesListResponse) ContentType() string {
 type KLSECompaniesListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]KLSECompanyListItem
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9710,9 +7807,9 @@ func (r KLSECompaniesListResponse) ContentType() string {
 type KLSECompaniesTopRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *KLSETopCompaniesResponse
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9742,9 +7839,9 @@ func (r KLSECompaniesTopRetrieveResponse) ContentType() string {
 type KLSECompanyReportRetrieve2Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]interface{}
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9774,8 +7871,8 @@ func (r KLSECompanyReportRetrieve2Response) ContentType() string {
 type KLSESectorsListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]string
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9805,9 +7902,9 @@ func (r KLSESectorsListResponse) ContentType() string {
 type ListingPerformanceRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *IPOPerformance
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9837,8 +7934,8 @@ func (r ListingPerformanceRetrieveResponse) ContentType() string {
 type MiningCommoditiesRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *CommodityListItem
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9868,10 +7965,10 @@ func (r MiningCommoditiesRetrieveResponse) ContentType() string {
 type MiningCommoditiesPriceRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *CommodityPriceItem
-	JSON400      *map[string]interface{}
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9901,8 +7998,8 @@ func (r MiningCommoditiesPriceRetrieveResponse) ContentType() string {
 type MiningCompaniesRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningCompanyList
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9932,9 +8029,9 @@ func (r MiningCompaniesRetrieveResponse) ContentType() string {
 type MiningCompaniesFinancialsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningCompanyFinancials
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9964,9 +8061,9 @@ func (r MiningCompaniesFinancialsRetrieveResponse) ContentType() string {
 type MiningCompaniesOwnershipRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningCompanyOwnership
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -9996,9 +8093,9 @@ func (r MiningCompaniesOwnershipRetrieveResponse) ContentType() string {
 type MiningCompaniesPerformanceRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningCompanyPerformance
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10028,9 +8125,9 @@ func (r MiningCompaniesPerformanceRetrieveResponse) ContentType() string {
 type MiningCompaniesRetrieve2Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningCompanyDetail
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10060,8 +8157,8 @@ func (r MiningCompaniesRetrieve2Response) ContentType() string {
 type MiningContractsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningContractItem
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10091,10 +8188,10 @@ func (r MiningContractsRetrieveResponse) ContentType() string {
 type MiningExportsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ExportDestinationItem
-	JSON400      *map[string]interface{}
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10124,9 +8221,9 @@ func (r MiningExportsRetrieveResponse) ContentType() string {
 type MiningGlobalCommodityRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *GlobalCommodityDataItem
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10156,9 +8253,9 @@ func (r MiningGlobalCommodityRetrieveResponse) ContentType() string {
 type MiningLicenseAuctionsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningLicenseAuctionList
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10188,9 +8285,9 @@ func (r MiningLicenseAuctionsRetrieveResponse) ContentType() string {
 type MiningLicenseAuctionsRetrieve2Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningLicenseAuctionDetail
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10220,9 +8317,9 @@ func (r MiningLicenseAuctionsRetrieve2Response) ContentType() string {
 type MiningLicensesRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningLicenseList
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10252,8 +8349,8 @@ func (r MiningLicensesRetrieveResponse) ContentType() string {
 type MiningResourcesReservesRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10283,9 +8380,9 @@ func (r MiningResourcesReservesRetrieveResponse) ContentType() string {
 type MiningResourcesReservesRetrieve2Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ResourcesReservesDetail
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10315,10 +8412,10 @@ func (r MiningResourcesReservesRetrieve2Response) ContentType() string {
 type MiningSalesDestinationRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *SalesDestinationResponse
-	JSON400      *map[string]interface{}
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10348,9 +8445,9 @@ func (r MiningSalesDestinationRetrieveResponse) ContentType() string {
 type MiningSitesRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningSiteList
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10380,9 +8477,9 @@ func (r MiningSitesRetrieveResponse) ContentType() string {
 type MiningSitesRetrieve2Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *MiningSiteDetail
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10412,10 +8509,10 @@ func (r MiningSitesRetrieve2Response) ContentType() string {
 type MiningTotalProductionRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *TotalProductionItem
-	JSON400      *map[string]interface{}
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10445,9 +8542,9 @@ func (r MiningTotalProductionRetrieveResponse) ContentType() string {
 type MostTradedRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]interface{}
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10477,9 +8574,9 @@ func (r MostTradedRetrieveResponse) ContentType() string {
 type NewsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *NewsArticleList
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10509,8 +8606,8 @@ func (r NewsRetrieveResponse) ContentType() string {
 type SGXBuybacksRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *SGXBuybacks
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10540,9 +8637,9 @@ func (r SGXBuybacksRetrieveResponse) ContentType() string {
 type SGXCompaniesRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *SGXCompanyScreenerResponse
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10572,9 +8669,9 @@ func (r SGXCompaniesRetrieveResponse) ContentType() string {
 type SGXCompaniesTopRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *SGXTopCompaniesResponse
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10604,9 +8701,9 @@ func (r SGXCompaniesTopRetrieveResponse) ContentType() string {
 type SGXCompanyReportRetrieve2Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]interface{}
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10636,9 +8733,9 @@ func (r SGXCompanyReportRetrieve2Response) ContentType() string {
 type SGXDailyRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]SGXDailyDataItem
-	JSON404      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON404      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10668,8 +8765,8 @@ func (r SGXDailyRetrieveResponse) ContentType() string {
 type SGXFilingsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *SGXFilings
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10699,8 +8796,8 @@ func (r SGXFilingsRetrieveResponse) ContentType() string {
 type SGXNewsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *SGXNews
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10730,8 +8827,8 @@ func (r SGXNewsRetrieveResponse) ContentType() string {
 type SGXSectorsListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]string
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10761,8 +8858,8 @@ func (r SGXSectorsListResponse) ContentType() string {
 type SGXShortSellRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *SGXShortSell
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10792,8 +8889,8 @@ func (r SGXShortSellRetrieveResponse) ContentType() string {
 type SGXTagsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *SGXTagListResponse
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10823,8 +8920,8 @@ func (r SGXTagsRetrieveResponse) ContentType() string {
 type SubindustriesListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]SubindustryItem
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10854,9 +8951,9 @@ func (r SubindustriesListResponse) ContentType() string {
 type SubsectorReportRetrieve2Response struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *map[string]interface{}
-	JSON400      *map[string]interface{}
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON400      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10886,8 +8983,8 @@ func (r SubsectorReportRetrieve2Response) ContentType() string {
 type SubsectorsListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]SubsectorItem
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10917,8 +9014,8 @@ func (r SubsectorsListResponse) ContentType() string {
 type SuspensionsRetrieveResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *IDXSuspensions
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -10948,8 +9045,8 @@ func (r SuspensionsRetrieveResponse) ContentType() string {
 type TagsListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]string
-	JSON429      *map[string]interface{}
+	JSON200      *interface{}
+	JSON429      *interface{}
 }
 
 // Status returns HTTPResponse.Status
@@ -11558,21 +9655,21 @@ func ParseBrokerActivityRetrieveResponse(rsp *http.Response) (*BrokerActivityRet
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest BrokerActivityByCodeResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11598,21 +9695,21 @@ func ParseBrokerActivityTopRetrieveResponse(rsp *http.Response) (*BrokerActivity
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest BrokerActivityTopResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11638,21 +9735,21 @@ func ParseBrokerSummaryRetrieveResponse(rsp *http.Response) (*BrokerSummaryRetri
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest BrokerSummaryBySymbolResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11678,21 +9775,21 @@ func ParseBrokerSummaryTopRetrieveResponse(rsp *http.Response) (*BrokerSummaryTo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest BrokerSummaryTopResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11718,14 +9815,14 @@ func ParseBrokersRetrieveResponse(rsp *http.Response) (*BrokersRetrieveResponse,
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []BrokerRegistryRow
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11751,21 +9848,21 @@ func ParseBrokersTopRetrieveResponse(rsp *http.Response) (*BrokersTopRetrieveRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest TopBrokersResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11791,21 +9888,21 @@ func ParseCompaniesRetrieveResponse(rsp *http.Response) (*CompaniesRetrieveRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CompanyScreenerResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11831,14 +9928,14 @@ func ParseCompaniesListCompaniesWithSegmentsListResponse(rsp *http.Response) (*C
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11864,21 +9961,21 @@ func ParseCompaniesTopChangesRetrieveResponse(rsp *http.Response) (*CompaniesTop
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest TopCompaniesChangesResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11904,21 +10001,21 @@ func ParseCompanyCorporateActionsRetrieveResponse(rsp *http.Response) (*CompanyC
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CorporateActionsResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11944,21 +10041,21 @@ func ParseCompanyGetSegmentsRetrieveResponse(rsp *http.Response) (*CompanyGetSeg
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CompanyRevenueSegments
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -11984,21 +10081,21 @@ func ParseCompanyGetQuarterlyFinancialDatesRetrieveResponse(rsp *http.Response) 
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12024,21 +10121,21 @@ func ParseCompanyReportRetrieve2Response(rsp *http.Response) (*CompanyReportRetr
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12064,21 +10161,21 @@ func ParseCompanyShareholdersCompositionRetrieveResponse(rsp *http.Response) (*C
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ShareholdersCompositionResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12104,21 +10201,21 @@ func ParseDailyRetrieveResponse(rsp *http.Response) (*DailyRetrieveResponse, err
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest DailyDataItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12144,21 +10241,21 @@ func ParseFilingsRetrieveResponse(rsp *http.Response) (*FilingsRetrieveResponse,
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest IDXFilings
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12184,21 +10281,21 @@ func ParseFinancialsQuarterlyRetrieveResponse(rsp *http.Response) (*FinancialsQu
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest QuarterlyFinancialItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12224,21 +10321,21 @@ func ParseForeignFlowRetrieveResponse(rsp *http.Response) (*ForeignFlowRetrieveR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ForeignFlowResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12264,14 +10361,14 @@ func ParseFreeFloatRetrieveResponse(rsp *http.Response) (*FreeFloatRetrieveRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest FreeFloatItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12297,21 +10394,21 @@ func ParseIDXTotalRetrieveResponse(rsp *http.Response) (*IDXTotalRetrieveRespons
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest IDXTotalItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12337,21 +10434,21 @@ func ParseIndexDailyRetrieveResponse(rsp *http.Response) (*IndexDailyRetrieveRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest IndexDailyDataItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12377,14 +10474,14 @@ func ParseIndustriesListResponse(rsp *http.Response) (*IndustriesListResponse, e
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []IndustryItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12410,21 +10507,21 @@ func ParseKLSECompaniesListResponse(rsp *http.Response) (*KLSECompaniesListRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []KLSECompanyListItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12450,21 +10547,21 @@ func ParseKLSECompaniesTopRetrieveResponse(rsp *http.Response) (*KLSECompaniesTo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest KLSETopCompaniesResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12490,21 +10587,21 @@ func ParseKLSECompanyReportRetrieve2Response(rsp *http.Response) (*KLSECompanyRe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12530,14 +10627,14 @@ func ParseKLSESectorsListResponse(rsp *http.Response) (*KLSESectorsListResponse,
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []string
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12563,21 +10660,21 @@ func ParseListingPerformanceRetrieveResponse(rsp *http.Response) (*ListingPerfor
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest IPOPerformance
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12603,14 +10700,14 @@ func ParseMiningCommoditiesRetrieveResponse(rsp *http.Response) (*MiningCommodit
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CommodityListItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12636,28 +10733,28 @@ func ParseMiningCommoditiesPriceRetrieveResponse(rsp *http.Response) (*MiningCom
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest CommodityPriceItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12683,14 +10780,14 @@ func ParseMiningCompaniesRetrieveResponse(rsp *http.Response) (*MiningCompaniesR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningCompanyList
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12716,21 +10813,21 @@ func ParseMiningCompaniesFinancialsRetrieveResponse(rsp *http.Response) (*Mining
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningCompanyFinancials
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12756,21 +10853,21 @@ func ParseMiningCompaniesOwnershipRetrieveResponse(rsp *http.Response) (*MiningC
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningCompanyOwnership
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12796,21 +10893,21 @@ func ParseMiningCompaniesPerformanceRetrieveResponse(rsp *http.Response) (*Minin
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningCompanyPerformance
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12836,21 +10933,21 @@ func ParseMiningCompaniesRetrieve2Response(rsp *http.Response) (*MiningCompanies
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningCompanyDetail
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12876,14 +10973,14 @@ func ParseMiningContractsRetrieveResponse(rsp *http.Response) (*MiningContractsR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningContractItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12909,28 +11006,28 @@ func ParseMiningExportsRetrieveResponse(rsp *http.Response) (*MiningExportsRetri
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ExportDestinationItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12956,21 +11053,21 @@ func ParseMiningGlobalCommodityRetrieveResponse(rsp *http.Response) (*MiningGlob
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GlobalCommodityDataItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -12996,21 +11093,21 @@ func ParseMiningLicenseAuctionsRetrieveResponse(rsp *http.Response) (*MiningLice
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningLicenseAuctionList
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13036,21 +11133,21 @@ func ParseMiningLicenseAuctionsRetrieve2Response(rsp *http.Response) (*MiningLic
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningLicenseAuctionDetail
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13076,21 +11173,21 @@ func ParseMiningLicensesRetrieveResponse(rsp *http.Response) (*MiningLicensesRet
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningLicenseList
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13116,14 +11213,14 @@ func ParseMiningResourcesReservesRetrieveResponse(rsp *http.Response) (*MiningRe
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13149,21 +11246,21 @@ func ParseMiningResourcesReservesRetrieve2Response(rsp *http.Response) (*MiningR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ResourcesReservesDetail
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13189,28 +11286,28 @@ func ParseMiningSalesDestinationRetrieveResponse(rsp *http.Response) (*MiningSal
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SalesDestinationResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13236,21 +11333,21 @@ func ParseMiningSitesRetrieveResponse(rsp *http.Response) (*MiningSitesRetrieveR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningSiteList
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13276,21 +11373,21 @@ func ParseMiningSitesRetrieve2Response(rsp *http.Response) (*MiningSitesRetrieve
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest MiningSiteDetail
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13316,28 +11413,28 @@ func ParseMiningTotalProductionRetrieveResponse(rsp *http.Response) (*MiningTota
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest TotalProductionItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13363,21 +11460,21 @@ func ParseMostTradedRetrieveResponse(rsp *http.Response) (*MostTradedRetrieveRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13403,21 +11500,21 @@ func ParseNewsRetrieveResponse(rsp *http.Response) (*NewsRetrieveResponse, error
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest NewsArticleList
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13443,14 +11540,14 @@ func ParseSGXBuybacksRetrieveResponse(rsp *http.Response) (*SGXBuybacksRetrieveR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SGXBuybacks
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13476,21 +11573,21 @@ func ParseSGXCompaniesRetrieveResponse(rsp *http.Response) (*SGXCompaniesRetriev
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SGXCompanyScreenerResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13516,21 +11613,21 @@ func ParseSGXCompaniesTopRetrieveResponse(rsp *http.Response) (*SGXCompaniesTopR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SGXTopCompaniesResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13556,21 +11653,21 @@ func ParseSGXCompanyReportRetrieve2Response(rsp *http.Response) (*SGXCompanyRepo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13596,21 +11693,21 @@ func ParseSGXDailyRetrieveResponse(rsp *http.Response) (*SGXDailyRetrieveRespons
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []SGXDailyDataItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13636,14 +11733,14 @@ func ParseSGXFilingsRetrieveResponse(rsp *http.Response) (*SGXFilingsRetrieveRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SGXFilings
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13669,14 +11766,14 @@ func ParseSGXNewsRetrieveResponse(rsp *http.Response) (*SGXNewsRetrieveResponse,
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SGXNews
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13702,14 +11799,14 @@ func ParseSGXSectorsListResponse(rsp *http.Response) (*SGXSectorsListResponse, e
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []string
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13735,14 +11832,14 @@ func ParseSGXShortSellRetrieveResponse(rsp *http.Response) (*SGXShortSellRetriev
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SGXShortSell
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13768,14 +11865,14 @@ func ParseSGXTagsRetrieveResponse(rsp *http.Response) (*SGXTagsRetrieveResponse,
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SGXTagListResponse
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13801,14 +11898,14 @@ func ParseSubindustriesListResponse(rsp *http.Response) (*SubindustriesListRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []SubindustryItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13834,21 +11931,21 @@ func ParseSubsectorReportRetrieve2Response(rsp *http.Response) (*SubsectorReport
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13874,14 +11971,14 @@ func ParseSubsectorsListResponse(rsp *http.Response) (*SubsectorsListResponse, e
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []SubsectorItem
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13907,14 +12004,14 @@ func ParseSuspensionsRetrieveResponse(rsp *http.Response) (*SuspensionsRetrieveR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest IDXSuspensions
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -13940,14 +12037,14 @@ func ParseTagsListResponse(rsp *http.Response) (*TagsListResponse, error) {
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []string
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest map[string]interface{}
+		var dest interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

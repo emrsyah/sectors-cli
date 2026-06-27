@@ -84,12 +84,17 @@ func main() {
 		}
 	}
 
-	// Drop `format: date-time` / `date` so those string fields generate as Go
-	// `string` instead of `time.Time` / openapi_types.Date. The API returns
-	// offset-less timestamps (e.g. `2026-06-27T07:30:00`) that time.Time's
-	// RFC3339 unmarshal rejects, which would break the generated response
-	// parser. The CLI emits the raw response body and never reads the typed
-	// fields, so plain strings are strictly better here.
+	// Empty every response body schema so oapi-codegen generates `interface{}`
+	// for the typed response fields. The upstream spec's response schemas are
+	// frequently inaccurate (arrays typed as single objects, string-vs-number,
+	// string-vs-map, offset-less timestamps), which makes the generated response
+	// PARSER reject otherwise-valid payloads. The CLI emits the raw response body
+	// and never reads the typed fields, so an untyped body is strictly safer:
+	// json.Unmarshal into interface{} accepts any valid JSON.
+	emptied := emptyResponseSchemas(paths)
+
+	// Also drop `format: date-time` / `date` from any remaining (request-side)
+	// string schemas, so nothing generates time.Time / openapi_types.Date.
 	stripped := stripDateFormats(doc)
 
 	pretty, err := json.MarshalIndent(doc, "", "  ")
@@ -97,10 +102,43 @@ func main() {
 	must(os.WriteFile(*out, pretty, 0o644))
 
 	sort.Strings(dropped)
-	fmt.Fprintf(os.Stderr, "fixspec: wrote %s (dropped %d malformed operation(s), stripped %d date format(s))\n", *out, len(dropped), stripped)
+	fmt.Fprintf(os.Stderr, "fixspec: wrote %s (dropped %d malformed operation(s), emptied %d response schema(s), stripped %d date format(s))\n", *out, len(dropped), emptied, stripped)
 	for _, d := range dropped {
 		fmt.Fprintln(os.Stderr, "  - "+d)
 	}
+}
+
+// emptyResponseSchemas replaces every operation's response body schema with an
+// empty schema ({}), so the generated client uses interface{} for response
+// bodies and its parser never rejects a valid payload. Returns how many it
+// replaced. Request parameter schemas are untouched.
+func emptyResponseSchemas(paths map[string]any) int {
+	count := 0
+	for _, pv := range paths {
+		ops, _ := pv.(map[string]any)
+		for _, ov := range ops {
+			op, _ := ov.(map[string]any)
+			if op == nil {
+				continue
+			}
+			responses, _ := op["responses"].(map[string]any)
+			for _, rv := range responses {
+				resp, _ := rv.(map[string]any)
+				content, _ := resp["content"].(map[string]any)
+				for _, cv := range content {
+					mt, _ := cv.(map[string]any)
+					if mt == nil {
+						continue
+					}
+					if _, ok := mt["schema"]; ok {
+						mt["schema"] = map[string]any{}
+						count++
+					}
+				}
+			}
+		}
+	}
+	return count
 }
 
 // stripDateFormats recursively removes `format: date-time` and `format: date`
