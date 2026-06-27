@@ -58,9 +58,15 @@ go generate ./...   # runs fixspec, then oapi-codegen
   - `ranking most-traded | top-changes`
   - `news list | filings | suspensions`
   - `list industries | subindustries | subsectors | tags | segments-companies`
-- `sgx` — Singapore _(planned)_
-- `klse` — Malaysia _(planned)_
-- `mining` — Mining extension _(planned)_
+- `sgx` — Singapore (complete): ✅ `companies` (screener) · `top` · `report` · `sectors` · `tags` · `news` · `filings` · `buybacks` · `short-sell` · `daily`
+- `klse` — Malaysia (complete): ✅ `companies --sector` · `top` · `report` · `sectors`
+- `mining` — Mining extension (complete): ✅
+  - `companies list | get | financials | ownership | performance`
+  - `commodities list | price | exports | global | sales-destination`
+  - `sites list | get` · `production total` · `reserves index | get`
+  - `licenses list` · `auctions list | get` · `contracts list`
+
+All **63 API operations** are wired to commands.
 
 ### Code layout
 
@@ -73,8 +79,11 @@ pointer helpers. Adding a market is a new `cmd/<market>/` package wired into
 cmd/
 ├── root.go            # global flags, Execute, wires market packages
 ├── auth.go
-├── cmdutil/           # NewClient, Emit, Fail, Do, Opt{Str,Int,Bool,Enum}
-└── idx/               # company.go companies.go brokers.go market.go news.go list.go
+├── cmdutil/           # NewClient, Emit, Fail, Do, Opt{Str,Int,Bool,Float,Enum}
+├── idx/               # company.go companies.go brokers.go market.go news.go list.go
+├── sgx/               # companies.go reference.go news.go transaction.go
+├── klse/              # klse.go
+└── mining/            # companies.go commodities.go sites.go licenses.go
 ```
 
 See `sectors-docs/_ENDPOINT_INVENTORY.md` for the full endpoint → command map.
