@@ -10,4 +10,8 @@
 .DS_Store
 *.log
 
-/sectors-docs
+# Bulky mirror of upstream docs — exclude its contents, but keep our own
+# endpoint→command map. Note: ignore /sectors-docs/* (contents), not the dir
+# itself, so git still descends and the negation below can re-include the file.
+/sectors-docs/*
+!/sectors-docs/_ENDPOINT_INVENTORY.md
