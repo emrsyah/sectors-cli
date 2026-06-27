@@ -19,7 +19,7 @@ jobs:
         with:
           go-version-file: go.mod
           cache: true
-      - run: go build -o sectors .
+      - run: go build -o sectors ./cmd/sectors
       - name: live smoke
         env:
           SECTORS_API_KEY: ${{ secrets.SECTORS_API_KEY }}

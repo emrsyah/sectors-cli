@@ -6,6 +6,23 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-06-27
+
+Packaging fixes for `go install`. No functional changes to the CLI.
+
+### Changed
+
+- Moved the entrypoint to `cmd/sectors/`, so installing via Go produces a binary
+  named `sectors` (not `sectors-cli`):
+  `go install github.com/emrsyah/sectors-cli/cmd/sectors@latest`.
+
+### Notes
+
+- `0.1.0` is not installable through the public Go module proxy — the proxy
+  cached a fetch failure from before the repository was public. Use `0.1.1`
+  (or set `GOPROXY=direct GOSUMDB=off` for `0.1.0`).
+- Agent skills (`skills/`) ship alongside the CLI; see `skills/README.md`.
+
 ## [0.1.0] - 2026-06-27
 
 First public release. A complete, agent-facing CLI for the
@@ -45,5 +62,6 @@ Singapore (SGX), Malaysia (KLSE), and Indonesian mining data.
   `sectors auth login`.
 - Cross-platform release binaries (goreleaser) and shell completions.
 
-[Unreleased]: https://github.com/emrsyah/sectors-cli/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/emrsyah/sectors-cli/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/emrsyah/sectors-cli/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/emrsyah/sectors-cli/releases/tag/v0.1.0

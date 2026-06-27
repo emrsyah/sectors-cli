@@ -17,7 +17,7 @@ capabilities by reading help.
 curl -fsSL https://raw.githubusercontent.com/emrsyah/sectors-cli/main/install.sh | sh
 
 # Or with Go
-go install github.com/emrsyah/sectors-cli@latest
+go install github.com/emrsyah/sectors-cli/cmd/sectors@latest
 ```
 
 Or download a prebuilt archive for your platform from the
@@ -27,7 +27,7 @@ Or download a prebuilt archive for your platform from the
 
 ```bash
 # Build from source
-go build -o sectors .
+go build -o sectors ./cmd/sectors
 
 # Authenticate (get a key at https://sectors.app/api)
 ./sectors auth login --api-key <your-key>      # or: export SECTORS_API_KEY=<key>

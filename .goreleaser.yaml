@@ -11,7 +11,7 @@ before:
 
 builds:
   - id: sectors
-    main: .
+    main: ./cmd/sectors
     binary: sectors
     env:
       - CGO_ENABLED=0
