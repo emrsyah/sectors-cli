@@ -12,6 +12,7 @@ import (
 
 	"github.com/supertypeai/sectors-cli/cmd/cmdutil"
 	"github.com/supertypeai/sectors-cli/cmd/idx"
+	"github.com/supertypeai/sectors-cli/cmd/sgx"
 	"github.com/supertypeai/sectors-cli/internal/output"
 )
 
@@ -59,5 +60,6 @@ func init() {
 	rootCmd.AddCommand(
 		newAuthCmd(),
 		idx.NewCmd(),
+		sgx.NewCmd(),
 	)
 }
