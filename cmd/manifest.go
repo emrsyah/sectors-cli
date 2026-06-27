@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"github.com/supertypeai/sectors-cli/cmd/cmdutil"
+	"github.com/emrsyah/sectors-cli/cmd/cmdutil"
 )
 
 // tool is the neutral, format-independent description of one CLI command,

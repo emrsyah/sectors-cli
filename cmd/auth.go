@@ -6,8 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/supertypeai/sectors-cli/cmd/cmdutil"
-	"github.com/supertypeai/sectors-cli/internal/config"
+	"github.com/emrsyah/sectors-cli/cmd/cmdutil"
+	"github.com/emrsyah/sectors-cli/internal/config"
 )
 
 func newAuthCmd() *cobra.Command {

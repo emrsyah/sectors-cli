@@ -1,14 +1,14 @@
 #!/bin/sh
 # Install the sectors CLI from GitHub releases.
 #
-#   curl -fsSL https://raw.githubusercontent.com/supertypeai/sectors-cli/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/emrsyah/sectors-cli/main/install.sh | sh
 #
 # Env overrides:
 #   SECTORS_VERSION       version tag to install (default: latest release)
 #   SECTORS_INSTALL_DIR   install directory (default: /usr/local/bin, else ~/.local/bin)
 set -eu
 
-REPO="supertypeai/sectors-cli"
+REPO="emrsyah/sectors-cli"
 BIN="sectors"
 
 die() { echo "install: $*" >&2; exit 1; }

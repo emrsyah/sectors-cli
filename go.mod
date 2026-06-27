@@ -1,4 +1,4 @@
-module github.com/supertypeai/sectors-cli
+module github.com/emrsyah/sectors-cli
 
 go 1.26.1
 

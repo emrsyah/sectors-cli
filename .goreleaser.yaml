@@ -19,7 +19,7 @@ builds:
     goarch: [amd64, arm64]
     ldflags:
       - -s -w
-      - -X github.com/supertypeai/sectors-cli/cmd.Version={{ .Version }}
+      - -X github.com/emrsyah/sectors-cli/cmd.Version={{ .Version }}
 
 archives:
   - id: sectors
@@ -51,7 +51,7 @@ release:
 # brews:
 #   - name: sectors
 #     repository:
-#       owner: supertypeai
+#       owner: emrsyah
 #       name: homebrew-tap
 #     homepage: https://docs.sectors.app
 #     description: CLI for the Sectors Financial API (IDX, SGX, KLSE, mining)

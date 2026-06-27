@@ -10,16 +10,16 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/supertypeai/sectors-cli/cmd/cmdutil"
-	"github.com/supertypeai/sectors-cli/cmd/idx"
-	"github.com/supertypeai/sectors-cli/cmd/klse"
-	"github.com/supertypeai/sectors-cli/cmd/mining"
-	"github.com/supertypeai/sectors-cli/cmd/sgx"
-	"github.com/supertypeai/sectors-cli/internal/output"
+	"github.com/emrsyah/sectors-cli/cmd/cmdutil"
+	"github.com/emrsyah/sectors-cli/cmd/idx"
+	"github.com/emrsyah/sectors-cli/cmd/klse"
+	"github.com/emrsyah/sectors-cli/cmd/mining"
+	"github.com/emrsyah/sectors-cli/cmd/sgx"
+	"github.com/emrsyah/sectors-cli/internal/output"
 )
 
 // Version is the CLI version, overridden at build time via
-// -ldflags "-X github.com/supertypeai/sectors-cli/cmd.Version=v1.2.3"
+// -ldflags "-X github.com/emrsyah/sectors-cli/cmd.Version=v1.2.3"
 // (goreleaser sets this automatically).
 var Version = "dev"
 

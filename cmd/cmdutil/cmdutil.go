@@ -14,9 +14,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/supertypeai/sectors-cli/internal/config"
-	"github.com/supertypeai/sectors-cli/internal/output"
-	"github.com/supertypeai/sectors-cli/internal/sectors"
+	"github.com/emrsyah/sectors-cli/internal/config"
+	"github.com/emrsyah/sectors-cli/internal/output"
+	"github.com/emrsyah/sectors-cli/internal/sectors"
 )
 
 // HandledError signals that a command already rendered its own error to stderr.

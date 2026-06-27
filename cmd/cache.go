@@ -6,7 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/supertypeai/sectors-cli/cmd/cmdutil"
+	"github.com/emrsyah/sectors-cli/cmd/cmdutil"
 )
 
 func newCacheCmd() *cobra.Command {

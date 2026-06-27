@@ -45,5 +45,5 @@ Singapore (SGX), Malaysia (KLSE), and Indonesian mining data.
   `sectors auth login`.
 - Cross-platform release binaries (goreleaser) and shell completions.
 
-[Unreleased]: https://github.com/supertypeai/sectors-cli/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/supertypeai/sectors-cli/releases/tag/v0.1.0
+[Unreleased]: https://github.com/emrsyah/sectors-cli/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/emrsyah/sectors-cli/releases/tag/v0.1.0

@@ -1,6 +1,6 @@
 package main
 
-import "github.com/supertypeai/sectors-cli/cmd"
+import "github.com/emrsyah/sectors-cli/cmd"
 
 func main() {
 	cmd.Execute()

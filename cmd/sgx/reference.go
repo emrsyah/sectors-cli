@@ -3,8 +3,8 @@ package sgx
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/supertypeai/sectors-cli/cmd/cmdutil"
-	"github.com/supertypeai/sectors-cli/internal/sectors"
+	"github.com/emrsyah/sectors-cli/cmd/cmdutil"
+	"github.com/emrsyah/sectors-cli/internal/sectors"
 )
 
 func newSectorsCmd() *cobra.Command {
