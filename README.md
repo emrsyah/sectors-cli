@@ -26,6 +26,49 @@ go build -o sectors .
 ./sectors idx company report BBCA -o pretty
 ```
 
+## Output formats (`-o` / `--output`)
+
+| value | behaviour |
+|---|---|
+| `auto` (default) | pretty JSON on an interactive terminal, compact JSON when piped (best for agents) |
+| `json` | compact single-line JSON |
+| `pretty` | indented JSON |
+| `table` | ASCII table for list responses (arrays or `{results:[…]}`); falls back to pretty JSON for nested/single-object responses |
+
+```bash
+sectors idx transaction daily BBCA --start 2026-06-20 --end 2026-06-26 -o table
+sectors idx companies --q "top 5 banks by revenue" | jq '.results[].symbol'
+```
+
+Failed requests print a JSON error to **stderr** and exit non-zero, so scripts
+and agents can branch on the result.
+
+## Shell completions
+
+Cobra generates completions for bash, zsh, fish, and PowerShell:
+
+```bash
+sectors completion zsh > "${fpath[1]}/_sectors"     # zsh
+sectors completion bash | sudo tee /etc/bash_completion.d/sectors   # bash
+```
+
+## Releasing
+
+Versioned cross-platform binaries are built with [goreleaser](https://goreleaser.com)
+(`.goreleaser.yaml`). The version is injected via ldflags and surfaced by
+`sectors --version`.
+
+```bash
+goreleaser release --snapshot --clean   # local snapshot build
+git tag v0.1.0 && goreleaser release --clean   # tagged release
+```
+
+## Tests
+
+```bash
+go test ./...
+```
+
 ## Architecture
 
 | Layer | What |
