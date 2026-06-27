@@ -9,6 +9,7 @@ require (
 	github.com/mattn/go-isatty v0.0.22
 	github.com/oapi-codegen/runtime v1.4.2
 	github.com/spf13/cobra v1.10.2
+	github.com/spf13/pflag v1.0.9
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -38,7 +39,6 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/speakeasy-api/jsonpath v0.6.3 // indirect
 	github.com/speakeasy-api/openapi v1.19.2 // indirect
-	github.com/spf13/pflag v1.0.9 // indirect
 	github.com/vmware-labs/yaml-jsonpath v0.3.2 // indirect
 	github.com/woodsbury/decimal128 v1.4.0 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect

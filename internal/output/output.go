@@ -12,6 +12,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 
 	"github.com/mattn/go-isatty"
@@ -92,13 +93,40 @@ func EmitJSON(w io.Writer, body []byte, format Format) error {
 	}
 }
 
+// Category classifies an HTTP status into a stable, agent-friendly bucket and
+// reports whether the condition is retryable. status 0 means a client-side or
+// transport error.
+func Category(status int) (category string, retryable bool) {
+	switch {
+	case status == 0:
+		return "error", false
+	case status == http.StatusTooManyRequests:
+		return "rate_limited", true
+	case status >= 500:
+		return "server", true
+	case status == http.StatusUnauthorized, status == http.StatusForbidden:
+		return "auth", false
+	case status == http.StatusNotFound:
+		return "not_found", false
+	case status >= 400:
+		return "invalid_input", false
+	default:
+		return "ok", false
+	}
+}
+
 // EmitError writes a structured error to stderr as JSON. status is the HTTP
 // status code when the error came from the API (0 for client-side errors), and
-// body is the API's raw error payload if any.
+// body is the API's raw error payload if any. The envelope always carries a
+// `category` and (when true) `retryable` so agents can branch programmatically.
 func EmitError(status int, msg string, body []byte) {
-	payload := map[string]any{"error": msg}
+	category, retryable := Category(status)
+	payload := map[string]any{"error": msg, "category": category}
 	if status != 0 {
 		payload["status"] = status
+	}
+	if retryable {
+		payload["retryable"] = true
 	}
 	if len(bytes.TrimSpace(body)) > 0 {
 		// Embed the API's error JSON if it parses, else as a string.

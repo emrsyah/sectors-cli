@@ -43,6 +43,68 @@ sectors idx companies --q "top 5 banks by revenue" | jq '.results[].symbol'
 Failed requests print a JSON error to **stderr** and exit non-zero, so scripts
 and agents can branch on the result.
 
+## Agent integration
+
+This CLI is designed to be driven by AI agents.
+
+**Tool manifest.** Generate tool/function-calling schemas for every command,
+straight from the command tree (so they never drift from the real flags):
+
+```bash
+sectors manifest --format anthropic        # tool-use definitions
+sectors manifest --format openai           # function-calling
+sectors manifest --format json             # neutral
+sectors manifest --filter "idx_*"          # export a subset
+```
+
+Each leaf command becomes one tool (e.g. `idx_company_report`) with a JSON-Schema
+`input_schema`: positional args and flags become typed properties, required flags
+land in `required`, and `a|b|c` choice flags become `enum`s.
+
+**Structured errors.** Failures emit a JSON envelope on stderr with a stable
+`category` and `retryable` so an agent can branch without scraping text:
+
+```json
+{"error":"request failed","status":429,"category":"rate_limited","retryable":true}
+```
+
+**Exit codes** mirror the category, so shell/agent logic can branch without
+parsing JSON at all:
+
+| code | meaning |
+|---|---|
+| 0 | success |
+| 1 | client-side / config / transport error |
+| 2 | invalid input (400/422) |
+| 3 | auth (401/403) |
+| 4 | not found (404) |
+| 5 | rate limited (429) |
+| 6 | server error (5xx) |
+
+**Automatic retries.** Transient failures (429, 500, 502, 503, 504, and network
+errors) are retried with exponential backoff + jitter, honoring `Retry-After`.
+Tune with `--retries` (default 3) and `--retry-max-wait` (default 10s); set
+`--retries 0` to disable.
+
+**Response shaping (token economy).** Shrink responses *before* they reach the
+model's context window:
+
+```bash
+# keep only the fields you need (dotted paths; key[] maps over an array)
+sectors idx company report BBCA --select overview.market_cap,valuation
+sectors idx companies --where "sub_sector='banks'" --select "results[].symbol"
+
+# cap a list (adds "_truncated": true to paginated responses)
+sectors idx news list --max 5
+
+# just the count
+sectors idx list subsectors --count        # -> {"count": 33}
+```
+
+These run client-side after the request, so they compose with the server-side
+`--sections` / `--limit` filters. In practice `--select` cuts a full company
+report from ~56 KB to a few dozen bytes.
+
 ## Shell completions
 
 Cobra generates completions for bash, zsh, fish, and PowerShell:

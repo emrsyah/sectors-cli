@@ -7,7 +7,6 @@
 package cmdutil
 
 import (
-	"errors"
 	"net/http"
 	"strings"
 
@@ -18,18 +17,44 @@ import (
 	"github.com/supertypeai/sectors-cli/internal/sectors"
 )
 
-// ErrHandled signals that a command already rendered its own error to stderr,
-// so the top-level Execute should exit non-zero without printing anything more.
-var ErrHandled = errors.New("handled")
+// HandledError signals that a command already rendered its own error to stderr.
+// The top-level Execute exits with Code without printing anything more.
+type HandledError struct{ Code int }
+
+func (e *HandledError) Error() string { return "handled" }
 
 // Global persistent flag names, defined once on the root command and read here
 // from any (possibly deeply nested) subcommand via inherited flags.
 const (
-	FlagAPIKey  = "api-key"
-	FlagBaseURL = "base-url"
-	FlagOutput  = "output"
-	FlagTimeout = "timeout"
+	FlagAPIKey    = "api-key"
+	FlagBaseURL   = "base-url"
+	FlagOutput    = "output"
+	FlagTimeout   = "timeout"
+	FlagRetries   = "retries"
+	FlagRetryWait = "retry-max-wait"
+	FlagSelect    = "select"
+	FlagMax       = "max"
+	FlagCount     = "count"
 )
+
+// exitCode maps an HTTP status to a stable process exit code so shell/agent
+// logic can branch without parsing JSON. 0-status (client/transport) -> 1.
+func exitCode(status int) int {
+	switch {
+	case status == http.StatusTooManyRequests:
+		return 5
+	case status >= 500:
+		return 6
+	case status == http.StatusUnauthorized, status == http.StatusForbidden:
+		return 3
+	case status == http.StatusNotFound:
+		return 4
+	case status >= 400:
+		return 2
+	default:
+		return 1
+	}
+}
 
 // NewClient builds an authenticated API client from the resolved configuration
 // (flag → env → config file precedence for the API key and base URL).
@@ -46,7 +71,14 @@ func NewClient(cmd *cobra.Command) (*sectors.ClientWithResponses, error) {
 	if err != nil {
 		return nil, err
 	}
-	return sectors.New(base, key, &http.Client{Timeout: timeout})
+
+	retries, _ := cmd.Flags().GetInt(FlagRetries)
+	retryWait, _ := cmd.Flags().GetDuration(FlagRetryWait)
+	httpClient := &http.Client{
+		Timeout:   timeout,
+		Transport: sectors.NewRetryTransport(http.DefaultTransport, retries, retryWait),
+	}
+	return sectors.New(base, key, httpClient)
 }
 
 // Format returns the validated --output format for this command.
@@ -59,10 +91,11 @@ func Format(cmd *cobra.Command) output.Format {
 	return f
 }
 
-// Fail renders a structured error to stderr and returns ErrHandled.
+// Fail renders a structured error to stderr and returns a *HandledError whose
+// exit code reflects the status category.
 func Fail(status int, msg string, body []byte) error {
 	output.EmitError(status, msg, body)
-	return ErrHandled
+	return &HandledError{Code: exitCode(status)}
 }
 
 // Do builds a client, runs fn, and emits the result. fn performs one API call
@@ -86,10 +119,38 @@ func Emit(cmd *cobra.Command, statusCode int, body []byte) error {
 	if statusCode < 200 || statusCode >= 300 {
 		return Fail(statusCode, "request failed", body)
 	}
+	body = shape(cmd, body)
 	if err := output.EmitJSON(cmd.OutOrStdout(), body, Format(cmd)); err != nil {
 		return Fail(0, err.Error(), nil)
 	}
 	return nil
+}
+
+// shape applies the client-side response economizers (--count, --select, --max)
+// to a successful body before it's rendered. --count short-circuits the others.
+// If no shaping flag was set the body is returned untouched (preserving the
+// API's exact JSON).
+func shape(cmd *cobra.Command, body []byte) []byte {
+	if cmd.Flags().Changed(FlagCount) {
+		if v, _ := cmd.Flags().GetBool(FlagCount); v {
+			if out, err := output.Count(body); err == nil {
+				return out
+			}
+		}
+	}
+	if cmd.Flags().Changed(FlagSelect) {
+		raw, _ := cmd.Flags().GetString(FlagSelect)
+		if out, err := output.Project(body, strings.Split(raw, ",")); err == nil {
+			body = out
+		}
+	}
+	if cmd.Flags().Changed(FlagMax) {
+		n, _ := cmd.Flags().GetInt(FlagMax)
+		if out, err := output.Truncate(body, n); err == nil {
+			body = out
+		}
+	}
+	return body
 }
 
 // Sym normalizes a ticker path argument (e.g. bbca -> BBCA).
