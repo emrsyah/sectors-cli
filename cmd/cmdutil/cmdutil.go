@@ -8,6 +8,8 @@ package cmdutil
 
 import (
 	"net/http"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -35,7 +37,20 @@ const (
 	FlagSelect    = "select"
 	FlagMax       = "max"
 	FlagCount     = "count"
+	FlagVerbose   = "verbose"
+	FlagDryRun    = "dry-run"
+	FlagNoCache   = "no-cache"
+	FlagCacheTTL  = "cache-ttl"
 )
+
+// CacheDir returns the directory used for the on-disk response cache.
+func CacheDir() (string, error) {
+	dir, err := config.Dir()
+	if err != nil {
+		return "", err
+	}
+	return filepath.Join(dir, "cache"), nil
+}
 
 // exitCode maps an HTTP status to a stable process exit code so shell/agent
 // logic can branch without parsing JSON. 0-status (client/transport) -> 1.
@@ -72,13 +87,40 @@ func NewClient(cmd *cobra.Command) (*sectors.ClientWithResponses, error) {
 		return nil, err
 	}
 
-	retries, _ := cmd.Flags().GetInt(FlagRetries)
-	retryWait, _ := cmd.Flags().GetDuration(FlagRetryWait)
 	httpClient := &http.Client{
 		Timeout:   timeout,
-		Transport: sectors.NewRetryTransport(http.DefaultTransport, retries, retryWait),
+		Transport: buildTransport(cmd),
 	}
 	return sectors.New(base, key, httpClient)
+}
+
+// buildTransport composes the RoundTripper stack from flags. Order (outermost
+// first): verbose logging → cache → retry → base. --dry-run short-circuits the
+// network entirely (no retry/cache).
+func buildTransport(cmd *cobra.Command) http.RoundTripper {
+	verbose, _ := cmd.Flags().GetBool(FlagVerbose)
+	dryRun, _ := cmd.Flags().GetBool(FlagDryRun)
+
+	var t http.RoundTripper = http.DefaultTransport
+	if dryRun {
+		t = sectors.NewDryRunTransport()
+	} else {
+		retries, _ := cmd.Flags().GetInt(FlagRetries)
+		retryWait, _ := cmd.Flags().GetDuration(FlagRetryWait)
+		t = sectors.NewRetryTransport(t, retries, retryWait)
+
+		noCache, _ := cmd.Flags().GetBool(FlagNoCache)
+		if !noCache {
+			if dir, err := CacheDir(); err == nil {
+				ttl, _ := cmd.Flags().GetDuration(FlagCacheTTL)
+				t = sectors.NewCacheTransport(t, sectors.CacheConfig{Dir: dir, TTL: ttl})
+			}
+		}
+	}
+	if verbose {
+		t = sectors.NewLogTransport(t, os.Stderr)
+	}
+	return t
 }
 
 // Format returns the validated --output format for this command.

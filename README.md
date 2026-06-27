@@ -105,6 +105,31 @@ These run client-side after the request, so they compose with the server-side
 `--sections` / `--limit` filters. In practice `--select` cuts a full company
 report from ~56 KB to a few dozen bytes.
 
+## Caching & observability
+
+**Caching.** GET responses are cached on disk to cut latency, cost, and
+rate-limit pressure for the repetitive reads agents make. TTLs vary by endpoint
+volatility (reference lists ~24h, intraday data ~1m, reports ~5m). Override or
+inspect:
+
+```bash
+sectors idx list subsectors --no-cache       # bypass the cache
+sectors idx daily BBCA --cache-ttl 30s        # uniform TTL override
+sectors cache path                            # where the cache lives
+sectors cache clear                           # wipe it
+```
+
+**Tracing.** `--verbose` (`-v`) logs each request to stderr; `--dry-run` prints
+the request that *would* be sent (API key redacted) without calling the API:
+
+```bash
+$ sectors idx list subsectors -v
+GET https://api.sectors.app/v2/subsectors/ -> 200 1ms (cache hit)
+
+$ sectors idx company report BBCA --dry-run
+{"dry_run":true,"method":"GET","url":".../v2/company/report/BBCA/","headers":{"Authorization":"***redacted***"}}
+```
+
 ## Shell completions
 
 Cobra generates completions for bash, zsh, fish, and PowerShell:

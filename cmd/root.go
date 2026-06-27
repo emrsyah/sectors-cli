@@ -72,10 +72,15 @@ func init() {
 	pf.String(cmdutil.FlagSelect, "", "keep only these comma-separated JSON paths (e.g. \"results[].symbol\")")
 	pf.Int(cmdutil.FlagMax, -1, "truncate the result list to at most N items")
 	pf.Bool(cmdutil.FlagCount, false, "output only the result count")
+	pf.BoolP(cmdutil.FlagVerbose, "v", false, "log each request (method, URL, status, duration) to stderr")
+	pf.Bool(cmdutil.FlagDryRun, false, "print the request that would be sent without calling the API")
+	pf.Bool(cmdutil.FlagNoCache, false, "bypass the on-disk response cache")
+	pf.Duration(cmdutil.FlagCacheTTL, 0, "uniform cache TTL (0 = per-endpoint defaults)")
 
 	rootCmd.AddCommand(
 		newAuthCmd(),
 		newManifestCmd(),
+		newCacheCmd(),
 		idx.NewCmd(),
 		sgx.NewCmd(),
 		klse.NewCmd(),

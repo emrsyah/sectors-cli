@@ -162,7 +162,20 @@ artifacts; smoke job catches an intentionally broken endpoint.
 
 ---
 
-## 5. Response caching + observability
+## 5. Response caching + observability ✅ DONE
+
+> Shipped: `internal/sectors/cache.go` (on-disk GET cache as a RoundTripper;
+> TTL by endpoint class — ref ~24h / intraday ~1m / reports ~5m; `--no-cache`,
+> `--cache-ttl`; `sectors cache path|clear`) and `internal/sectors/observe.go`
+> (`-v/--verbose` request tracing to stderr w/ cache hit/miss + duration;
+> `--dry-run` echoes the request, key redacted, no network). Transport chain in
+> `cmdutil.buildTransport`: verbose → cache → retry → base; dry-run
+> short-circuits. Tests in `internal/sectors/cache_test.go`. Verified live:
+> 273ms miss → 1ms cache hit.
+>
+> Deferred sub-item: surfacing the API request-id header in the error envelope
+> (would require threading response headers through ~63 call sites; verbose
+> logging covers the debugging need for now).
 
 **Goal.** Cut latency, token-gen cost, and rate-limit pressure for repetitive agent
 reads; make agent runs debuggable.

@@ -26,12 +26,14 @@ type tool struct {
 var globalFlags = map[string]bool{
 	cmdutil.FlagAPIKey: true, cmdutil.FlagBaseURL: true, cmdutil.FlagOutput: true,
 	cmdutil.FlagTimeout: true, cmdutil.FlagRetries: true, cmdutil.FlagRetryWait: true,
-	"help": true, "version": true,
+	cmdutil.FlagSelect: true, cmdutil.FlagMax: true, cmdutil.FlagCount: true,
+	cmdutil.FlagVerbose: true, cmdutil.FlagDryRun: true, cmdutil.FlagNoCache: true,
+	cmdutil.FlagCacheTTL: true, "help": true, "version": true,
 }
 
 // skipTrees are top-level command groups not exposed as agent tools.
 var skipTrees = map[string]bool{
-	"help": true, "completion": true, "manifest": true, "auth": true,
+	"help": true, "completion": true, "manifest": true, "auth": true, "cache": true,
 }
 
 func newManifestCmd() *cobra.Command {
