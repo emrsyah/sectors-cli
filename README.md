@@ -46,12 +46,35 @@ generically into `sectors-schema.fixed.json` before generation — the pristine
 go generate ./...   # runs fixspec, then oapi-codegen
 ```
 
-## Command tree (in progress)
+## Command tree
 
 - `auth login | status`
-- `idx` — Indonesia: `company report` ✅ · (screener, financials, brokers, transactions, rankings, news, … to come)
+- `idx` — Indonesia (complete): ✅
+  - `companies` (screener: `--where` / `--q` / `--order-by` / `--limit`) · `free-float`
+  - `company report | segments | financials | corporate-actions | shareholders | ipo-performance | quarterly-dates`
+  - `subsector report`
+  - `brokers activity | activity-top | summary | summary-top | registry | top | foreign-flow`
+  - `transaction daily | idx-total | index-daily`
+  - `ranking most-traded | top-changes`
+  - `news list | filings | suspensions`
+  - `list industries | subindustries | subsectors | tags | segments-companies`
 - `sgx` — Singapore _(planned)_
 - `klse` — Malaysia _(planned)_
 - `mining` — Mining extension _(planned)_
+
+### Code layout
+
+Each market is its own package exposing a `NewCmd()` constructor; `cmd/cmdutil`
+holds the shared client factory, response/error rendering, and optional-flag →
+pointer helpers. Adding a market is a new `cmd/<market>/` package wired into
+`cmd/root.go`.
+
+```
+cmd/
+├── root.go            # global flags, Execute, wires market packages
+├── auth.go
+├── cmdutil/           # NewClient, Emit, Fail, Do, Opt{Str,Int,Bool,Enum}
+└── idx/               # company.go companies.go brokers.go market.go news.go list.go
+```
 
 See `sectors-docs/_ENDPOINT_INVENTORY.md` for the full endpoint → command map.
