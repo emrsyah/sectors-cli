@@ -10,10 +10,23 @@ requests exit non-zero with a JSON error on stderr, and `--help` on any command
 documents its parameters straight from the API spec — so an agent can discover
 capabilities by reading help.
 
+## Install
+
+```bash
+# Released binary (Linux/macOS)
+curl -fsSL https://raw.githubusercontent.com/emrsyah/sectors-cli/main/install.sh | sh
+
+# Or with Go
+go install github.com/emrsyah/sectors-cli@latest
+```
+
+Or download a prebuilt archive for your platform from the
+[releases page](https://github.com/emrsyah/sectors-cli/releases).
+
 ## Quick start
 
 ```bash
-# Build
+# Build from source
 go build -o sectors .
 
 # Authenticate (get a key at https://sectors.app/api)
