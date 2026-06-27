@@ -128,6 +128,13 @@ func OptBool(cmd *cobra.Command, name string, val bool) *bool {
 	return nil
 }
 
+func OptFloat(cmd *cobra.Command, name string, val float64) *float64 {
+	if cmd.Flags().Changed(name) {
+		return &val
+	}
+	return nil
+}
+
 // OptEnum is like OptStr but for the generated string-enum param types. The
 // value is validated server-side, so an invalid one surfaces as a 400.
 func OptEnum[T ~string](cmd *cobra.Command, name, val string) *T {

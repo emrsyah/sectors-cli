@@ -12,6 +12,8 @@ import (
 
 	"github.com/supertypeai/sectors-cli/cmd/cmdutil"
 	"github.com/supertypeai/sectors-cli/cmd/idx"
+	"github.com/supertypeai/sectors-cli/cmd/klse"
+	"github.com/supertypeai/sectors-cli/cmd/mining"
 	"github.com/supertypeai/sectors-cli/cmd/sgx"
 	"github.com/supertypeai/sectors-cli/internal/output"
 )
@@ -61,5 +63,7 @@ func init() {
 		newAuthCmd(),
 		idx.NewCmd(),
 		sgx.NewCmd(),
+		klse.NewCmd(),
+		mining.NewCmd(),
 	)
 }
