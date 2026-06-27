@@ -11,10 +11,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"time"
 
 	"github.com/oapi-codegen/runtime"
-	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 const (
@@ -391,15 +389,15 @@ type BrokerActivityByCodeResponse struct {
 	Data       []BrokerActivityByDate `json:"data"`
 
 	// End Range end date.
-	End openapi_types.Date `json:"end"`
+	End string `json:"end"`
 
 	// Start Range start date.
-	Start openapi_types.Date `json:"start"`
+	Start string `json:"start"`
 }
 
 // BrokerActivityByDate defines model for BrokerActivityByDate.
 type BrokerActivityByDate struct {
-	Date    openapi_types.Date  `json:"date"`
+	Date    string              `json:"date"`
 	Summary []BrokerActivityRow `json:"summary"`
 }
 
@@ -463,8 +461,8 @@ type BrokerActivityTopDistribution struct {
 // BrokerActivityTopResponse defines model for BrokerActivityTopResponse.
 type BrokerActivityTopResponse struct {
 	BrokerCode       string                          `json:"broker_code"`
-	End              openapi_types.Date              `json:"end"`
-	Start            openapi_types.Date              `json:"start"`
+	End              string                          `json:"end"`
+	Start            string                          `json:"start"`
 	TopAccumulations []BrokerActivityTopAccumulation `json:"top_accumulations"`
 	TopDistributions []BrokerActivityTopDistribution `json:"top_distributions"`
 }
@@ -485,7 +483,7 @@ type BrokerRegistryRow struct {
 
 // BrokerSummaryByDate defines model for BrokerSummaryByDate.
 type BrokerSummaryByDate struct {
-	Date    openapi_types.Date `json:"date"`
+	Date    string             `json:"date"`
 	Summary []BrokerSummaryRow `json:"summary"`
 }
 
@@ -494,10 +492,10 @@ type BrokerSummaryBySymbolResponse struct {
 	Data []BrokerSummaryByDate `json:"data"`
 
 	// End Range end date.
-	End openapi_types.Date `json:"end"`
+	End string `json:"end"`
 
 	// Start Range start date.
-	Start openapi_types.Date `json:"start"`
+	Start string `json:"start"`
 
 	// Symbol Ticker symbol (e.g. BBCA.JK).
 	Symbol string `json:"symbol"`
@@ -556,11 +554,11 @@ type BrokerSummaryTopResponse struct {
 	Cohort string `json:"cohort"`
 
 	// End Range end date.
-	End    openapi_types.Date `json:"end"`
-	Origin string             `json:"origin"`
+	End    string `json:"end"`
+	Origin string `json:"origin"`
 
 	// Start Range start date.
-	Start openapi_types.Date `json:"start"`
+	Start string `json:"start"`
 
 	// Symbol Ticker symbol.
 	Symbol     string                   `json:"symbol"`
@@ -583,10 +581,10 @@ type CommodityListItem struct {
 	DataPoints int `json:"data_points"`
 
 	// EarliestDate Earliest available date.
-	EarliestDate openapi_types.Date `json:"earliest_date"`
+	EarliestDate string `json:"earliest_date"`
 
 	// LatestDate Latest available date.
-	LatestDate openapi_types.Date `json:"latest_date"`
+	LatestDate string `json:"latest_date"`
 
 	// Name Commodity name.
 	Name string `json:"name"`
@@ -595,7 +593,7 @@ type CommodityListItem struct {
 // CommodityPriceItem defines model for CommodityPriceItem.
 type CommodityPriceItem struct {
 	// Date Price date (monthly).
-	Date openapi_types.Date `json:"date"`
+	Date string `json:"date"`
 
 	// Name Commodity name.
 	Name string `json:"name"`
@@ -695,7 +693,7 @@ type DailyDataItem struct {
 	Close int `json:"close"`
 
 	// Date Trading date.
-	Date openapi_types.Date `json:"date"`
+	Date string `json:"date"`
 
 	// MarketCap Market cap in IDR.
 	MarketCap int `json:"market_cap"`
@@ -727,7 +725,7 @@ type ExportDestinationItem struct {
 
 // ForeignFlowDailyPoint defines model for ForeignFlowDailyPoint.
 type ForeignFlowDailyPoint struct {
-	Date openapi_types.Date `json:"date"`
+	Date string `json:"date"`
 
 	// NetForeignInflow IDR. Positive = foreign brokers were net buyers that day.
 	NetForeignInflow int `json:"net_foreign_inflow"`
@@ -738,10 +736,10 @@ type ForeignFlowResponse struct {
 	Data []ForeignFlowDailyPoint `json:"data"`
 
 	// End Range end date.
-	End openapi_types.Date `json:"end"`
+	End string `json:"end"`
 
 	// Start Range start date.
-	Start openapi_types.Date `json:"start"`
+	Start string `json:"start"`
 
 	// Symbol Ticker symbol.
 	Symbol string `json:"symbol"`
@@ -792,7 +790,7 @@ type GlobalCommodityDataItem struct {
 // IDXTotalItem defines model for IDXTotalItem.
 type IDXTotalItem struct {
 	// Date Trading date.
-	Date openapi_types.Date `json:"date"`
+	Date string `json:"date"`
 
 	// IDXTotalMarketCap Total IDX market cap in IDR.
 	IDXTotalMarketCap int `json:"idx_total_market_cap"`
@@ -879,7 +877,7 @@ type IDXFilingsItem struct {
 	Tags *[]string `json:"tags"`
 
 	// Timestamp Timestamp of the transaction.
-	Timestamp *time.Time `json:"timestamp"`
+	Timestamp *string `json:"timestamp"`
 
 	// Title Filing title.
 	Title *string `json:"title"`
@@ -933,7 +931,7 @@ type IDXSuspensionsItem struct {
 	Reason *string `json:"reason"`
 
 	// SuspensionDate Date the suspension took effect.
-	SuspensionDate openapi_types.Date `json:"suspension_date"`
+	SuspensionDate string `json:"suspension_date"`
 
 	// Symbol IDX ticker symbol (with `.JK` suffix).
 	Symbol string `json:"symbol"`
@@ -969,7 +967,7 @@ type IDXSuspensionsPagination struct {
 // IndexDailyDataItem defines model for IndexDailyDataItem.
 type IndexDailyDataItem struct {
 	// Date Trading date.
-	Date openapi_types.Date `json:"date"`
+	Date string `json:"date"`
 
 	// IndexCode Index code (e.g. IDX30, LQ45).
 	IndexCode string `json:"index_code"`
@@ -1203,7 +1201,7 @@ type MiningCompanyPerformance struct {
 // MiningContractItem defines model for MiningContractItem.
 type MiningContractItem struct {
 	// ContractPeriodEnd Contract end date.
-	ContractPeriodEnd *openapi_types.Date `json:"contract_period_end"`
+	ContractPeriodEnd *string `json:"contract_period_end"`
 
 	// ContractorName Contractor company name.
 	ContractorName string `json:"contractor_name"`
@@ -1239,13 +1237,13 @@ type MiningLicenseAuctionDetail struct {
 	CompanySlug *string `json:"company_slug"`
 
 	// CreatedAt Record creation date.
-	CreatedAt openapi_types.Date `json:"created_at"`
+	CreatedAt string `json:"created_at"`
 
 	// Kdi KDI value.
 	Kdi *string `json:"kdi"`
 
 	// LastModified Last modified date.
-	LastModified openapi_types.Date `json:"last_modified"`
+	LastModified string `json:"last_modified"`
 
 	// LicenseNumber License number.
 	LicenseNumber *string `json:"license_number"`
@@ -1269,7 +1267,7 @@ type MiningLicenseAuctionDetail struct {
 	Winner bool `json:"winner"`
 
 	// WinnerDate Winner announcement date.
-	WinnerDate *openapi_types.Date `json:"winner_date"`
+	WinnerDate *string `json:"winner_date"`
 
 	// WIUPCode WIUP identification code.
 	WIUPCode string `json:"wiup_code"`
@@ -1320,7 +1318,7 @@ type MiningLicenseAuctionListItem struct {
 	Winner bool `json:"winner"`
 
 	// WinnerDate Date winner was announced.
-	WinnerDate *openapi_types.Date `json:"winner_date"`
+	WinnerDate *string `json:"winner_date"`
 
 	// WIUPCode WIUP identification code.
 	WIUPCode string `json:"wiup_code"`
@@ -1383,10 +1381,10 @@ type MiningLicenseListItem struct {
 	Generation *string `json:"generation"`
 
 	// LicenseEffectiveDate License start date.
-	LicenseEffectiveDate openapi_types.Date `json:"license_effective_date"`
+	LicenseEffectiveDate string `json:"license_effective_date"`
 
 	// LicenseExpiryDate License expiry date.
-	LicenseExpiryDate openapi_types.Date `json:"license_expiry_date"`
+	LicenseExpiryDate string `json:"license_expiry_date"`
 
 	// LicenseNumber Official license number.
 	LicenseNumber string `json:"license_number"`
@@ -1650,7 +1648,7 @@ type OwnershipSubsidiaryItem struct {
 // QuarterlyFinancialItem defines model for QuarterlyFinancialItem.
 type QuarterlyFinancialItem struct {
 	// Date Quarterly report date.
-	Date openapi_types.Date `json:"date"`
+	Date string `json:"date"`
 
 	// Earnings Quarterly net earnings in IDR.
 	Earnings *int `json:"earnings"`
@@ -1788,7 +1786,7 @@ type SGXBuybacksItem struct {
 	PricePerShare interface{} `json:"price_per_share"`
 
 	// PurchaseDate Date the buyback transaction was executed.
-	PurchaseDate openapi_types.Date `json:"purchase_date"`
+	PurchaseDate string `json:"purchase_date"`
 
 	// Symbol SGX 3-character symbol.
 	Symbol string `json:"symbol"`
@@ -1882,7 +1880,7 @@ type SGXDailyDataItem struct {
 	Close *float64 `json:"close"`
 
 	// Date Trading date.
-	Date openapi_types.Date `json:"date"`
+	Date string `json:"date"`
 
 	// Symbol SGX 3-character symbol.
 	Symbol string `json:"symbol"`
@@ -1930,7 +1928,7 @@ type SGXFilingsItem struct {
 	Symbol *string `json:"symbol"`
 
 	// Timestamp Filing date.
-	Timestamp *openapi_types.Date `json:"timestamp"`
+	Timestamp *string `json:"timestamp"`
 
 	// TransactionType One of: award, buy, others, sell, transfer.
 	TransactionType *string `json:"transaction_type"`
@@ -2008,7 +2006,7 @@ type SGXNewsItem struct {
 	Tags []string `json:"tags"`
 
 	// Timestamp Article publication timestamp (ISO 8601).
-	Timestamp time.Time `json:"timestamp"`
+	Timestamp string `json:"timestamp"`
 
 	// Title Article headline.
 	Title *string `json:"title"`
@@ -2050,7 +2048,7 @@ type SGXShortSell struct {
 // SGXShortSellItem defines model for SgxShortSellItem.
 type SGXShortSellItem struct {
 	// Date Settlement date of the short sell activity.
-	Date openapi_types.Date `json:"date"`
+	Date string `json:"date"`
 
 	// Name Counterparty / short seller name.
 	Name string `json:"name"`
@@ -2120,7 +2118,7 @@ type ShareholdersCompositionRow struct {
 	CorporateL *int `json:"corporate_l"`
 
 	// Date Snapshot date (end-of-month).
-	Date openapi_types.Date `json:"date"`
+	Date string `json:"date"`
 
 	// FinancialInstitutionsF Shares held by foreign financial institutions.
 	FinancialInstitutionsF *int `json:"financial_institutions_f"`
@@ -2203,11 +2201,11 @@ type SubsectorItem struct {
 
 // TopBrokersResponse defines model for TopBrokersResponse.
 type TopBrokersResponse struct {
-	Cohort  string             `json:"cohort"`
-	Date    openapi_types.Date `json:"date"`
-	Metric  string             `json:"metric"`
-	Origin  string             `json:"origin"`
-	Results []TopBrokersRow    `json:"results"`
+	Cohort  string          `json:"cohort"`
+	Date    string          `json:"date"`
+	Metric  string          `json:"metric"`
+	Origin  string          `json:"origin"`
+	Results []TopBrokersRow `json:"results"`
 }
 
 // TopBrokersRow defines model for TopBrokersRow.
@@ -2239,7 +2237,7 @@ type TopGainersRow struct {
 	LastClosePrice int `json:"last_close_price"`
 
 	// LatestCloseDate Date of the most recent close.
-	LatestCloseDate openapi_types.Date `json:"latest_close_date"`
+	LatestCloseDate string `json:"latest_close_date"`
 
 	// Name Full company name.
 	Name string `json:"name"`
@@ -2257,7 +2255,7 @@ type TopLosersRow struct {
 	LastClosePrice int `json:"last_close_price"`
 
 	// LatestCloseDate Date of the most recent close.
-	LatestCloseDate openapi_types.Date `json:"latest_close_date"`
+	LatestCloseDate string `json:"latest_close_date"`
 
 	// Name Full company name.
 	Name string `json:"name"`

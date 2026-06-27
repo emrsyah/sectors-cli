@@ -84,15 +84,47 @@ func main() {
 		}
 	}
 
+	// Drop `format: date-time` / `date` so those string fields generate as Go
+	// `string` instead of `time.Time` / openapi_types.Date. The API returns
+	// offset-less timestamps (e.g. `2026-06-27T07:30:00`) that time.Time's
+	// RFC3339 unmarshal rejects, which would break the generated response
+	// parser. The CLI emits the raw response body and never reads the typed
+	// fields, so plain strings are strictly better here.
+	stripped := stripDateFormats(doc)
+
 	pretty, err := json.MarshalIndent(doc, "", "  ")
 	must(err)
 	must(os.WriteFile(*out, pretty, 0o644))
 
 	sort.Strings(dropped)
-	fmt.Fprintf(os.Stderr, "fixspec: wrote %s (dropped %d malformed operation(s))\n", *out, len(dropped))
+	fmt.Fprintf(os.Stderr, "fixspec: wrote %s (dropped %d malformed operation(s), stripped %d date format(s))\n", *out, len(dropped), stripped)
 	for _, d := range dropped {
 		fmt.Fprintln(os.Stderr, "  - "+d)
 	}
+}
+
+// stripDateFormats recursively removes `format: date-time` and `format: date`
+// from string schemas anywhere in the document, returning how many it removed.
+func stripDateFormats(node any) int {
+	count := 0
+	switch n := node.(type) {
+	case map[string]any:
+		if f, ok := n["format"].(string); ok && (f == "date-time" || f == "date") {
+			// Only strip from string-typed (or untyped) schemas.
+			if t, ok := n["type"].(string); !ok || t == "string" {
+				delete(n, "format")
+				count++
+			}
+		}
+		for _, v := range n {
+			count += stripDateFormats(v)
+		}
+	case []any:
+		for _, v := range n {
+			count += stripDateFormats(v)
+		}
+	}
+	return count
 }
 
 func must(err error) {
