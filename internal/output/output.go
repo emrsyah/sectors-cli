@@ -27,15 +27,18 @@ const (
 	FormatJSON Format = "json"
 	// FormatPretty is indented JSON.
 	FormatPretty Format = "pretty"
+	// FormatTable renders tabular responses as a table, falling back to Pretty
+	// for data that isn't a list of records.
+	FormatTable Format = "table"
 )
 
 // ParseFormat validates a --output value.
 func ParseFormat(s string) (Format, error) {
 	switch Format(s) {
-	case FormatAuto, FormatJSON, FormatPretty:
+	case FormatAuto, FormatJSON, FormatPretty, FormatTable:
 		return Format(s), nil
 	default:
-		return "", fmt.Errorf("invalid --output %q: want auto, json, or pretty", s)
+		return "", fmt.Errorf("invalid --output %q: want auto, json, pretty, or table", s)
 	}
 }
 
@@ -59,6 +62,14 @@ func resolve(format Format, w io.Writer) Format {
 // requested format. body must already be valid JSON.
 func EmitJSON(w io.Writer, body []byte, format Format) error {
 	switch resolve(format, w) {
+	case FormatTable:
+		// Render a table when the payload is a list of records; otherwise fall
+		// back to indented JSON so nested documents stay readable.
+		if s, ok := renderTable(body); ok {
+			_, err := io.WriteString(w, s)
+			return err
+		}
+		return EmitJSON(w, body, FormatPretty)
 	case FormatPretty:
 		var buf bytes.Buffer
 		if err := json.Indent(&buf, body, "", "  "); err != nil {

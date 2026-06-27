@@ -37,10 +37,11 @@ go build -o sectors .
 
 ### Regenerating the client
 
-The upstream spec has a few malformed paths (a required path parameter missing
-from the URL template) that `oapi-codegen` rejects. `tools/fixspec` strips those
-generically into `sectors-schema.fixed.json` before generation — the pristine
-`sectors-schema.json` is never mutated.
+`tools/fixspec` sanitizes the upstream spec into `sectors-schema.fixed.json`
+before generation (the pristine `sectors-schema.json` is never mutated). It:
+
+1. drops malformed paths (a required path parameter missing from the URL template), which `oapi-codegen` rejects; and
+2. empties every **response** body schema so response bodies generate as `interface{}`. The upstream response schemas are frequently inaccurate (arrays typed as objects, string-vs-number, offset-less timestamps), which would make the generated response parser reject otherwise-valid payloads. The CLI emits the raw response body and never reads the typed fields, so untyped bodies are strictly safer. Request **parameter** types are untouched.
 
 ```bash
 go generate ./...   # runs fixspec, then oapi-codegen

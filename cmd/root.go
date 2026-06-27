@@ -18,9 +18,15 @@ import (
 	"github.com/supertypeai/sectors-cli/internal/output"
 )
 
+// Version is the CLI version, overridden at build time via
+// -ldflags "-X github.com/supertypeai/sectors-cli/cmd.Version=v1.2.3"
+// (goreleaser sets this automatically).
+var Version = "dev"
+
 var rootCmd = &cobra.Command{
-	Use:   "sectors",
-	Short: "CLI for the Sectors Financial API (IDX, SGX, KLSE, mining)",
+	Use:     "sectors",
+	Version: Version,
+	Short:   "CLI for the Sectors Financial API (IDX, SGX, KLSE, mining)",
 	Long: `sectors is a command-line client for the Sectors Financial API v2.
 
 It is built to be driven by humans and AI agents alike: output defaults to the
@@ -56,7 +62,7 @@ func init() {
 	pf := rootCmd.PersistentFlags()
 	pf.String(cmdutil.FlagAPIKey, "", "Sectors API key (overrides $SECTORS_API_KEY and config file)")
 	pf.String(cmdutil.FlagBaseURL, "", "override the API base URL (default https://api.sectors.app)")
-	pf.StringP(cmdutil.FlagOutput, "o", "auto", "output format: auto, json, or pretty")
+	pf.StringP(cmdutil.FlagOutput, "o", "auto", "output format: auto, json, pretty, or table")
 	pf.Duration(cmdutil.FlagTimeout, 30*time.Second, "HTTP request timeout")
 
 	rootCmd.AddCommand(
