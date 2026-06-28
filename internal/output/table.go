@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
@@ -158,8 +159,10 @@ func cell(v any) string {
 		s = string(raw)
 	}
 	s = strings.ReplaceAll(s, "\n", " ")
-	if len(s) > maxCellWidth {
-		s = s[:maxCellWidth-1] + "…"
+	// Truncate by runes, not bytes: company names and other API text are often
+	// non-ASCII (UTF-8), and a byte slice could cut mid-rune and emit garbage.
+	if utf8.RuneCountInString(s) > maxCellWidth {
+		s = string([]rune(s)[:maxCellWidth-1]) + "…"
 	}
 	return s
 }

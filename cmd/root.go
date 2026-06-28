@@ -86,4 +86,16 @@ func init() {
 		klse.NewCmd(),
 		mining.NewCmd(),
 	)
+
+	// Shell completion for the closed-set --output flag, so `-o <TAB>` suggests
+	// the valid formats (cobra already provides the `completion` command).
+	_ = rootCmd.RegisterFlagCompletionFunc(cmdutil.FlagOutput,
+		func(*cobra.Command, []string, string) ([]string, cobra.ShellCompDirective) {
+			return []string{
+				"auto\tpretty on a terminal, compact JSON when piped",
+				"json\tcompact single-line JSON",
+				"pretty\tindented JSON",
+				"table\tASCII table for list responses",
+			}, cobra.ShellCompDirectiveNoFileComp
+		})
 }

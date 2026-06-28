@@ -150,7 +150,11 @@ Cobra generates completions for bash, zsh, fish, and PowerShell:
 ```bash
 sectors completion zsh > "${fpath[1]}/_sectors"     # zsh
 sectors completion bash | sudo tee /etc/bash_completion.d/sectors   # bash
+sectors completion fish > ~/.config/fish/completions/sectors.fish   # fish
 ```
+
+Once installed, completing the `-o`/`--output` flag suggests the valid formats
+with descriptions (`auto`, `json`, `pretty`, `table`) — e.g. `sectors … -o <TAB>`.
 
 ## Releasing
 
