@@ -15,3 +15,6 @@
 # itself, so git still descends and the negation below can re-include the file.
 /sectors-docs/*
 !/sectors-docs/_ENDPOINT_INVENTORY.md
+
+# Go test binaries (e.g. from `go test -c` / -cpuprofile)
+*.test

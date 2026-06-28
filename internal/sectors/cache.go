@@ -42,10 +42,22 @@ func NewCacheTransport(base http.RoundTripper, cfg CacheConfig) http.RoundTrippe
 }
 
 type cacheEntry struct {
+	URL      string
+	Status   int
+	Header   map[string][]string
+	Body     []byte
+	StoredAt time.Time
+}
+
+// cacheHead is the on-disk metadata, serialized as a single JSON line. The
+// response body is NOT a field here: it is appended raw after the header line
+// (see store/readFresh). Keeping the body out of the JSON envelope avoids the
+// ~33% size blowup and the base64 encode/decode + full body re-validation that
+// a `[]byte`/`json.RawMessage` field would incur on every cache hit.
+type cacheHead struct {
 	URL      string              `json:"url"`
 	Status   int                 `json:"status"`
 	Header   map[string][]string `json:"header"`
-	Body     []byte              `json:"body"`
 	StoredAt time.Time           `json:"stored_at"`
 }
 
@@ -100,24 +112,36 @@ func readFresh(file string, ttl time.Duration) (*cacheEntry, bool) {
 	if err != nil {
 		return nil, false
 	}
-	var e cacheEntry
-	if err := json.Unmarshal(raw, &e); err != nil {
+	// Frame is "<json header>\n<raw body>". A missing newline means a
+	// legacy/corrupt file; treat it as a miss so it gets refetched and rewritten.
+	nl := bytes.IndexByte(raw, '\n')
+	if nl < 0 {
 		return nil, false
 	}
-	if time.Since(e.StoredAt) > ttl {
+	var h cacheHead
+	if err := json.Unmarshal(raw[:nl], &h); err != nil {
 		return nil, false
 	}
-	return &e, true
+	if time.Since(h.StoredAt) > ttl {
+		return nil, false
+	}
+	return &cacheEntry{URL: h.URL, Status: h.Status, Header: h.Header, Body: raw[nl+1:], StoredAt: h.StoredAt}, true
 }
 
 func store(file string, e *cacheEntry) {
 	if err := os.MkdirAll(filepath.Dir(file), 0o700); err != nil {
 		return
 	}
-	raw, err := json.Marshal(e)
+	// The HTTP header marshals to a single JSON line (header values can't contain
+	// newlines), so the first '\n' cleanly separates metadata from the raw body.
+	head, err := json.Marshal(cacheHead{URL: e.URL, Status: e.Status, Header: e.Header, StoredAt: e.StoredAt})
 	if err != nil {
 		return
 	}
+	raw := make([]byte, 0, len(head)+1+len(e.Body))
+	raw = append(raw, head...)
+	raw = append(raw, '\n')
+	raw = append(raw, e.Body...)
 	// Atomic write: temp then rename, so a reader never sees a partial file.
 	tmp := file + ".tmp"
 	if os.WriteFile(tmp, raw, 0o600) == nil {
