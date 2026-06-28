@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"strings"
 	"testing"
+	"unicode/utf8"
 )
 
 func TestParseFormat(t *testing.T) {
@@ -114,5 +115,23 @@ func TestCell(t *testing.T) {
 		if got := cell(c.in); got != c.want {
 			t.Errorf("%s: cell(%v) = %q, want %q", name, c.in, got, c.want)
 		}
+	}
+}
+
+// A long multibyte (UTF-8) string must truncate on a rune boundary, never
+// mid-rune — otherwise the table prints invalid UTF-8.
+func TestCell_TruncatesMultibyteSafely(t *testing.T) {
+	// 60 "é" runes (2 bytes each) exceeds the 48-rune cap.
+	long := strings.Repeat("é", 60)
+	got := cell(long)
+
+	if !utf8.ValidString(got) {
+		t.Fatalf("truncated cell is not valid UTF-8: %q", got)
+	}
+	if !strings.HasSuffix(got, "…") {
+		t.Errorf("expected ellipsis suffix, got %q", got)
+	}
+	if n := utf8.RuneCountInString(got); n != maxCellWidth {
+		t.Errorf("rune count = %d, want %d (%d content + ellipsis)", n, maxCellWidth, maxCellWidth-1)
 	}
 }
