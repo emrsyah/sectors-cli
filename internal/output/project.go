@@ -35,8 +35,10 @@ func splitPath(p string) []seg {
 // (e.g. `results[].symbol`, or `[].symbol` for a top-level array). Paths that
 // don't exist are skipped.
 func Project(body []byte, paths []string) ([]byte, error) {
-	var doc any
-	if err := json.Unmarshal(body, &doc); err != nil {
+	doc, ok := decodeForPaths(body, paths)
+	if !ok {
+		// Not JSON we can shape — return the body untouched (the CLI never
+		// corrupts a payload it can't parse).
 		return body, nil
 	}
 	var out any
@@ -53,6 +55,58 @@ func Project(body []byte, paths []string) ([]byte, error) {
 		out = map[string]any{}
 	}
 	return json.Marshal(out)
+}
+
+// decodeForPaths materializes just enough of body to satisfy paths. For a
+// top-level object it shallow-decodes the keys (each value stays a raw slice)
+// and then fully parses only the branches the paths reference — projectPath
+// never reads sibling keys, so pruning them up front is transparent but avoids
+// allocating the entire document. Other shapes fall back to a full decode.
+func decodeForPaths(body []byte, paths []string) (any, bool) {
+	if firstJSONByte(body) != '{' {
+		var doc any
+		if err := json.Unmarshal(body, &doc); err != nil {
+			return nil, false
+		}
+		return doc, true
+	}
+
+	var top map[string]json.RawMessage
+	if err := json.Unmarshal(body, &top); err != nil {
+		return nil, false
+	}
+	doc := make(map[string]any, len(paths))
+	for _, p := range paths {
+		key := splitPath(strings.TrimSpace(p))[0].key
+		if key == "" {
+			continue // top-level array segment can't match an object
+		}
+		if _, done := doc[key]; done {
+			continue
+		}
+		raw, ok := top[key]
+		if !ok {
+			continue // referenced key absent → projectPath would skip it anyway
+		}
+		var v any
+		if err := json.Unmarshal(raw, &v); err != nil {
+			continue
+		}
+		doc[key] = v
+	}
+	return doc, true
+}
+
+// firstJSONByte returns the first non-whitespace byte of b, or 0 if none.
+func firstJSONByte(b []byte) byte {
+	for _, c := range b {
+		switch c {
+		case ' ', '\t', '\n', '\r':
+		default:
+			return c
+		}
+	}
+	return 0
 }
 
 // projectPath rebuilds the subtree along segs, preserving structure.
